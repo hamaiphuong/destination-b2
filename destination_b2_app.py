@@ -66,7 +66,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="main-header">📘 DESTINATION B2: LEARNING HUB</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-header">Hệ thống Tự học Ngữ pháp & Từ vựng - Cấp độ B2</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Hệ thống Tự học Ngữ pháp & Từ vựng Nâng cao B2 (Cambridge FCE / Vantage Level)</div>', unsafe_allow_html=True)
 
 st.sidebar.title("📌 MENU CHÍNH")
 menu_option = st.sidebar.radio(
@@ -140,7 +140,7 @@ if menu_option == "📌 Tổng quan & Lộ trình tự học":
     with col1:
         st.markdown("""
         ### 📚 Cấu trúc bộ sách Destination B2
-        Sách gồm **28 Units** đan xen giữa Ngữ pháp và Từ vựng, cùng hệ thống bài ôn tập đáp ứng chuẩn đầu ra **FCE (B2)**:
+        Sách gồm **28 Units** đan xen giữa Ngữ pháp và Từ vựng nâng cao, cùng hệ thống bài ôn tập đáp ứng chuẩn đầu ra kỳ thi **Cambridge CAE (C1) & CPE (C2) / FCE (B2)**:
         * **14 Unit Ngữ pháp (Grammar Units)**: Hệ thống quy tắc chuyên sâu, cấu trúc câu nâng cao và các ngoại lệ.
         * **14 Unit Từ vựng (Vocabulary Units)**: Phân loại từ vựng theo chủ đề (*Topic Vocabulary in contrast*), Cụm động từ (*Phrasal Verbs*), Cụm từ cố định (*Phrases and Collocations*), Cấu trúc từ (*Word Patterns*) và Cấu tạo từ (*Word Formation*).
         * **14 Bài Ôn tập (Reviews)**: Ôn tập định kỳ sau mỗi 2 Units.
@@ -282,7 +282,7 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
     
     if "Unit 1" in selected_quiz_unit:
         st.subheader("✍️ Unit 1: Present time - Full Practice Exercises")
-        st.info("Hãy hoàn thành các bài tập bên dưới. Tất cả các câu hỏi trắc nghiệm đều được **bỏ trống ban đầu**, hãy tự chọn đáp án đúng trước khi nhấp nút **Kiểm tra Đáp án**.")
+        st.info("Hãy hoàn thành các bài tập bên dưới.")
         
         tab_a, tab_d, tab_e, tab_g, tab_i = st.tabs([
             "Exercise A (Present Simple vs Continuous)",
