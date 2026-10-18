@@ -7,7 +7,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for clean UI
 st.markdown("""
 <style>
     .main-header {
@@ -69,67 +68,19 @@ st.markdown("""
 st.markdown('<div class="main-header">📘 DESTINATION C1 & C2: LEARNING HUB</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Hệ thống Tự học Ngữ pháp & Từ vựng Nâng cao (Advanced C1 & C2 Proficiency)</div>', unsafe_allow_html=True)
 
-# FULL LIST OF 26 UNITS + 13 REVIEWS + 2 PROGRESS TESTS
-ALL_LESSONS = [
-    "Unit 1: Grammar - Present time",
-    "Unit 2: Vocabulary - Thinking and learning",
-    "Review 1: Units 1 & 2",
-    "Unit 3: Grammar - Past time",
-    "Unit 4: Vocabulary - Change and technology",
-    "Review 2: Units 3 & 4",
-    "Unit 5: Grammar - Future time",
-    "Unit 6: Vocabulary - Time and work",
-    "Review 3: Units 5 & 6",
-    "Unit 7: Grammar - Passives and causatives",
-    "Unit 8: Vocabulary - Movement and transport",
-    "Review 4: Units 7 & 8",
-    "Unit 9: Grammar - Modals and semi-modals",
-    "Unit 10: Vocabulary - Communication and the media",
-    "Review 5: Units 9 & 10",
-    "Unit 11: Grammar - Conditionals",
-    "Unit 12: Vocabulary - Chance and nature",
-    "Review 6: Units 11 & 12",
-    "Progress Test 1: Units 1–12",
-    "Unit 13: Grammar - Unreal time",
-    "Unit 14: Vocabulary - Quantity and money",
-    "Review 7: Units 13 & 14",
-    "Unit 15: Grammar - Adjectives and adverbs",
-    "Unit 16: Vocabulary - Materials and the built environment",
-    "Review 8: Units 15 & 16",
-    "Unit 17: Grammar - Clauses",
-    "Unit 18: Vocabulary - Reactions and health",
-    "Review 9: Units 17 & 18",
-    "Unit 19: Grammar - Complex sentences",
-    "Unit 20: Vocabulary - Power and social issues",
-    "Review 10: Units 19 & 20",
-    "Unit 21: Grammar - Noun phrases",
-    "Unit 22: Vocabulary - Quality and the arts",
-    "Review 11: Units 21 & 22",
-    "Unit 23: Grammar - Verbal complements",
-    "Unit 24: Vocabulary - Relationships and people",
-    "Review 12: Units 23 & 24",
-    "Unit 25: Grammar - Inversion and emphasis",
-    "Unit 26: Vocabulary - Preference and leisure",
-    "Review 13: Units 25 & 26",
-    "Progress Test 2: Units 13–26"
-]
-
 st.sidebar.title("📌 MENU CHÍNH")
 menu_option = st.sidebar.radio(
     "Chọn chức năng:",
     [
         "📌 Tổng quan & Lộ trình tự học",
         "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)",
-        "✍️ Bài tập Tương tác & Chấm điểm tự động",
+        "✍️ Bài tập Tương tác & Chấm điểm tự động (Interactive Quiz)",
         "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)",
         "⚠️ Góc lưu ý (Watch Out! Corner)",
-        "📊 Báo cáo Tiến độ Học tập"
+        "📊 Báo cáo Tiến độ Học tập (Progress Report)"
     ]
 )
 
-# -----------------------------------------------------------------------------
-# 1. TỔNG QUAN & LỘ TRÌNH TỰ HỌC
-# -----------------------------------------------------------------------------
 if menu_option == "📌 Tổng quan & Lộ trình tự học":
     st.header("📌 Tổng quan Sách & Lộ trình Tự học")
     
@@ -147,44 +98,76 @@ if menu_option == "📌 Tổng quan & Lộ trình tự học":
         """)
         
         st.markdown("""
-        ### 🗺️ Lộ trình 4 bước tự học thẩm thấu kiến thức
-        1. **Bước 1 (Theory Hub)**: Nắm vững bảng lý thuyết ngữ pháp và danh mục từ vựng chuẩn Cambridge.
-        2. **Bước 2 (Watch Out! Corner)**: Điểm lại các bẫy ngữ pháp và lỗi sai phổ biến mà thí sinh C1/C2 thường mắc phải.
-        3. **Bước 3 (Interactive Quiz)**: Luyện tập bài tập tương tác, kiểm tra đáp án tự động và đọc giải thích chi tiết.
-        4. **Bước 4 (Flashcards)**: Ôn luyện phản xạ từ vựng hàng ngày bằng thẻ ghi nhớ thông minh.
+        ### 🗺️ Lộ trình tự học:
+        * **Bước 1 (Theory Hub)**: Nắm vững bảng lý thuyết ngữ pháp và danh mục từ vựng chuẩn Cambridge.
+        * **Bước 2 (Watch Out! Corner)**: Điểm lại các bẫy ngữ pháp và lỗi sai phổ biến mà thí sinh C1/C2 thường mắc phải.
+        * **Bước 3 (Interactive Quiz)**: Luyện tập bài tập tương tác, kiểm tra đáp án tự động và đọc giải thích chi tiết.
+        * **Bước 4 (Flashcards)**: Ôn luyện phản xạ từ vựng hàng ngày bằng thẻ ghi nhớ thông minh.
         """)
 
     with col2:
-        st.info("📋 **DANH SÁCH 26 UNITS & 13 REVIEWS TRONG SÁCH**")
+        st.info("📋 **DANH SÁCH 26 UNITS & 13 REVIEWS**")
         
-        table_data = []
-        for item in ALL_LESSONS:
-            if "Grammar" in item:
-                parts = item.split(" - ")
-                table_data.append({"Mục": parts[0], "Loại": "Grammar", "Chủ đề": parts[1]})
-            elif "Vocabulary" in item:
-                parts = item.split(" - ")
-                table_data.append({"Mục": parts[0], "Loại": "Vocabulary", "Chủ đề": parts[1]})
-            elif "Review" in item:
-                table_data.append({"Mục": item.split(":")[0], "Loại": "Review", "Chủ đề": item.split(":")[1].strip()})
-            elif "Progress Test" in item:
-                table_data.append({"Mục": item.split(":")[0], "Loại": "Test", "Chủ đề": item.split(":")[1].strip()})
+        units_data = [
+            {"Unit / Review": "Unit 1", "Type": "Grammar", "Topic": "Present time"},
+            {"Unit / Review": "Unit 2", "Type": "Vocabulary", "Topic": "Thinking and learning"},
+            {"Unit / Review": "Review 1", "Type": "Review", "Topic": "Units 1 & 2"},
+            {"Unit / Review": "Unit 3", "Type": "Grammar", "Topic": "Past time"},
+            {"Unit / Review": "Unit 4", "Type": "Vocabulary", "Topic": "Change and technology"},
+            {"Unit / Review": "Review 2", "Type": "Review", "Topic": "Units 3 & 4"},
+            {"Unit / Review": "Unit 5", "Type": "Grammar", "Topic": "Future time"},
+            {"Unit / Review": "Unit 6", "Type": "Vocabulary", "Topic": "Time and work"},
+            {"Unit / Review": "Review 3", "Type": "Review", "Topic": "Units 5 & 6"},
+            {"Unit / Review": "Unit 7", "Type": "Grammar", "Topic": "Passives and causatives"},
+            {"Unit / Review": "Unit 8", "Type": "Vocabulary", "Topic": "Movement and transport"},
+            {"Unit / Review": "Review 4", "Type": "Review", "Topic": "Units 7 & 8"},
+            {"Unit / Review": "Unit 9", "Type": "Grammar", "Topic": "Modals and semi-modals"},
+            {"Unit / Review": "Unit 10", "Type": "Vocabulary", "Topic": "Communication and the media"},
+            {"Unit / Review": "Review 5", "Type": "Review", "Topic": "Units 9 & 10"},
+            {"Unit / Review": "Unit 11", "Type": "Grammar", "Topic": "Conditionals"},
+            {"Unit / Review": "Unit 12", "Type": "Vocabulary", "Topic": "Chance and nature"},
+            {"Unit / Review": "Review 6", "Type": "Review", "Topic": "Units 11 & 12"},
+            {"Unit / Review": "Progress Test 1", "Type": "Test", "Topic": "Units 1 - 12"},
+            {"Unit / Review": "Unit 13", "Type": "Grammar", "Topic": "Unreal time"},
+            {"Unit / Review": "Unit 14", "Type": "Vocabulary", "Topic": "Quantity and money"},
+            {"Unit / Review": "Review 7", "Type": "Review", "Topic": "Units 13 & 14"},
+            {"Unit / Review": "Unit 15", "Type": "Grammar", "Topic": "Adjectives and adverbs"},
+            {"Unit / Review": "Unit 16", "Type": "Vocabulary", "Topic": "Materials and resources"},
+            {"Unit / Review": "Review 8", "Type": "Review", "Topic": "Units 15 & 16"},
+            {"Unit / Review": "Unit 17", "Type": "Grammar", "Topic": "Clauses"},
+            {"Unit / Review": "Unit 18", "Type": "Vocabulary", "Topic": "The media"},
+            {"Unit / Review": "Review 9", "Type": "Review", "Topic": "Units 17 & 18"},
+            {"Unit / Review": "Unit 19", "Type": "Grammar", "Topic": "Complex sentences"},
+            {"Unit / Review": "Unit 20", "Type": "Vocabulary", "Topic": "The environment"},
+            {"Unit / Review": "Review 10", "Type": "Review", "Topic": "Units 19 & 20"},
+            {"Unit / Review": "Unit 21", "Type": "Grammar", "Topic": "Noun phrases"},
+            {"Unit / Review": "Unit 22", "Type": "Vocabulary", "Topic": "Power and politics"},
+            {"Unit / Review": "Review 11", "Type": "Review", "Topic": "Units 21 & 22"},
+            {"Unit / Review": "Unit 23", "Type": "Grammar", "Topic": "Prepositional phrases"},
+            {"Unit / Review": "Unit 24", "Type": "Vocabulary", "Topic": "Quality and quantity"},
+            {"Unit / Review": "Review 12", "Type": "Review", "Topic": "Units 23 & 24"},
+            {"Unit / Review": "Unit 25", "Type": "Grammar", "Topic": "Inversion and emphasis"},
+            {"Unit / Review": "Unit 26", "Type": "Vocabulary", "Topic": "Relationships and social life"},
+            {"Unit / Review": "Review 13", "Type": "Review", "Topic": "Units 25 & 26"},
+            {"Unit / Review": "Progress Test 2", "Type": "Test", "Topic": "Units 13 - 26"}
+        ]
+        df_units = pd.DataFrame(units_data)
+        st.dataframe(df_units, use_container_width=True, height=380)
 
-        df_units = pd.DataFrame(table_data)
-        st.dataframe(df_units, use_container_width=True, height=450)
-
-# -----------------------------------------------------------------------------
-# 2. TRA CỨU LÝ THUYẾT TRỌNG TÂM (THEORY HUB)
-# -----------------------------------------------------------------------------
 elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
     st.header("📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)")
     
     selected_unit = st.selectbox(
-        "🎯 Chọn Unit hoặc Bài Review cần tra cứu:",
-        ALL_LESSONS
+        "🎯 Chọn Unit cần tra cứu:",
+        [
+            "Unit 1: Grammar - Present time",
+            "Unit 2: Vocabulary - Thinking and learning",
+            "Unit 3: Grammar - Past time (Đang cập nhật)",
+            "Unit 4: Vocabulary - Change and technology (Đang cập nhật)"
+        ]
     )
     
-    if "Unit 1:" in selected_unit:
+    if "Unit 1" in selected_unit:
         st.subheader("Unit 1: Present time (Các thì Hiện tại)")
         
         tab_g1, tab_g2, tab_g3, tab_g4, tab_stative = st.tabs([
@@ -219,6 +202,8 @@ elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
             • <i>I <b>do like</b> playing word games!</i>
             </div>
             """, unsafe_allow_html=True)
+            
+            st.caption("Từ/Cụm từ hay đi kèm: always, usually, generally, often, sometimes, rarely, seldom, never, whenever, nowadays, these days, from time to time, every now and then, most/much of the time.")
 
         with tab_g2:
             st.markdown("#### 🔹 Present Continuous (Thì Hiện tại Tiếp diễn)")
@@ -254,15 +239,35 @@ elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
         with tab_stative:
             st.markdown("#### 🔹 Stative Verbs (Động từ Chỉ Trạng thái)")
             st.write("Động từ chỉ trạng thái thường **không** dùng ở thì tiếp diễn:")
+            
             st.markdown("""
             * **Communication**: agree, deny, disagree
             * **Thinking**: believe, consider, doubt, expect, imagine, know, mean, realise, suppose, suspect, think, understand
+            * **Existence**: be, exist
             * **Emotions**: adore, appeal, appreciate, desire, despise, detest, dislike, envy, fear, feel, forgive, hate, like, love, mind, need, pity, prefer, satisfy, trust, want, wish
             * **Perception**: appear, hear, look, notice, recognise, resemble, see, seem, smell, sound, taste
             * **Possession**: belong, concern, consist, contain, cost, depend, equal, fit, have, include, lack, measure, owe, own, possess, suit, weigh
+            * **Other**: deserve, matter
+            """)
+            
+            st.markdown("""
+            <div class="watchout-box">
+            <b>⚠️ Động từ vừa là Stative vừa là Dynamic (Action):</b><br>
+            Các động từ như <i>appeal, be, consider, depend, feel, have, include, look, mean, mind, see, smell, taste, think, weigh</i> có thể dùng ở thì tiếp diễn khi diễn tả <b>hành động</b> thay vì trạng thái:<br>
+            • <i>I <b>think</b> it's important to know how to use a computer.</i> (Trạng thái: think = believe)<br>
+            • <i>I'm <b>thinking</b> about going on a computer course.</i> (Hành động: think = consider)
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("#### 🇺🇸 US vs 🇬🇧 UK Grammar Differences")
+            st.info("""
+            * Trong tiếng Anh-Mỹ (US), Thì Quá khứ đơn thường được dùng thay cho Hiện tại hoàn thành:
+              * US: Did you find the answer yet? | UK: Have you found the answer yet?
+            * Trong tiếng Anh-Mỹ thân mật, **gotten** được dùng làm quá khứ phân từ của *get* (nghĩa là obtain/become/move):
+              * US: I haven't gotten the books yet. | UK: I haven't got the books yet.
             """)
 
-    elif "Unit 2:" in selected_unit:
+    elif "Unit 2" in selected_unit:
         st.subheader("Unit 2: Vocabulary - Thinking and learning")
         st.write("Danh mục từ vựng, Phrasal Verbs, Idioms, Word Formation kèm phiên âm IPA, Định nghĩa tiếng Anh & Nghĩa tiếng Việt (Tra cứu cuối sách):")
         
@@ -277,157 +282,88 @@ elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
         ]
         st.table(pd.DataFrame(vocab_list))
 
-    elif "Review" in selected_unit:
-        st.subheader(f"📖 Tra cứu Lý thuyết & Trọng tâm {selected_unit}")
-        st.info("📌 **Hệ thống hóa kiến thức tổng hợp:** Bài Review giúp tổng hợp lại điểm ngữ pháp và từ vựng then chốt của 2 Units liền trước. Hãy sử dụng mục Bài tập tương tác để luyện tập các câu hỏi tổng hợp!")
-
-    else:
-        st.subheader(f"📖 Lý thuyết {selected_unit}")
-        st.markdown(f"""
-        **Mô tả tổng quan cho {selected_unit}:**
-        - **Cấu trúc kiến thức:** Trình bày theo chuẩn khung tham chiếu Châu Âu C1 & C2 (CAE/CPE).
-        - **Nội dung trọng tâm:** Bao gồm các quy tắc ngữ pháp chuyên sâu, bảng so sánh ngữ cảnh, từ vựng theo chủ đề, phrasal verbs, collocations và word formation.
-        """)
-
-# -----------------------------------------------------------------------------
-# 3. BÀI TẬP TƯƠNG TÁC & CHẤM ĐIỂM TỰ ĐỘNG
-# -----------------------------------------------------------------------------
-elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự động":
-    st.header("✍️ Bài tập Tương tác & Chấm điểm tự động")
+elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự động (Interactive Quiz)":
+    st.header("✍️ Bài tập Tương tác Unit 1: Present time")
     
-    selected_quiz_unit = st.selectbox(
-        "🎯 Chọn Unit hoặc Bài Review để làm bài tập:",
-        ALL_LESSONS,
-        key="quiz_unit_select"
-    )
-    
-    st.write(f"### Bài tập: {selected_quiz_unit}")
-    
-    if "Unit 1:" in selected_quiz_unit:
-        tab_a, tab_b, tab_d, tab_e, tab_g, tab_h, tab_i = st.tabs([
-            "Exercise A (Verb Forms)",
-            "Exercise B (Time Words)",
-            "Exercise D (Stative Verbs)",
-            "Exercise E (State vs Action)",
-            "Exercise G (Perfect Simple vs Cont)",
-            "Exercise H (Perfect Tenses)",
-            "Exercise I (Adverbs)"
-        ])
+    with st.form("quiz_unit1_form"):
+        st.markdown("#### 📝 Exercise A: Write the verb in brackets in the correct form (Present Simple or Present Continuous)")
         
-        with tab_a:
-            with st.form("form_ex_a"):
-                st.markdown("#### Exercise A: Write the verb in brackets in the correct form (Present Simple or Present Continuous)")
-                
-                q_a1 = st.radio("Câu 1: Could you explain what 'antidisestablishmentarianism' _____ (mean)?", ["means", "is meaning"], index=None, key="qa1")
-                q_a2 = st.radio("Câu 2: Each song only _____ (cost) 50 cents at the moment.", ["costs", "is costing"], index=None, key="qa2")
-                q_a3 = st.radio("Câu 3: It _____ (not matter) which of the books we've studied this term you do your essay on.", ["doesn't matter", "isn't mattering"], index=None, key="qa3")
-                q_a4 = st.radio("Câu 4: It's only a quick call as I _____ (ring) from my mobile.", ["am ringing", "ring"], index=None, key="qa4")
-                q_a5 = st.radio("Câu 5: I think I _____ (recognise) that woman over there.", ["recognise", "am recognising"], index=None, key="qa5")
-                
-                sub_a = st.form_submit_button("🚀 Submit Exercise A")
-                if sub_a:
-                    score = 0
-                    if q_a1 == "means": score += 1
-                    if q_a2 == "costs": score += 1
-                    if q_a3 == "doesn't matter": score += 1
-                    if q_a4 == "am ringing": score += 1
-                    if q_a5 == "recognise": score += 1
-                    st.success(f"Kết quả Exercise A: {score}/5 câu đúng!")
+        q1 = st.text_input("Câu 1: My brother ________ (do) a degree at university so I don't see him very often, unfortunately.", key="q1")
+        q2 = st.text_input("Câu 2: Darren usually ________ (get) home until about eight o'clock.", key="q2")
+        q3 = st.radio("Câu 3: Why ________ ice ________ (float)?", ["does / float", "is / floating", "do / floats"], key="q3", index=None)
+        q4 = st.radio("Câu 4: I think I ________ (recognise) that woman over there. Wasn't she on that quiz show?", ["recognise", "am recognising", "recognised"], key="q4", index=None)
+        q5 = st.radio("Câu 5: Could you explain what 'antidisestablishmentarianism' ________ (mean), please?", ["means", "is meaning", "mean"], key="q5", index=None)
+        
+        st.markdown("#### 📝 Exercise G: Circle the correct word or phrase (Present Perfect Simple vs Continuous)")
+        q6 = st.radio("Câu 6: They ________ six bags with rubbish from the beach already.", ["have filled", "have been filling", "fill"], key="q6", index=None)
+        q7 = st.radio("Câu 7: I ________ up all day and my feet are killing me!", ["have been standing", "have stood", "am standing"], key="q7", index=None)
 
-        with tab_d:
-            with st.form("form_ex_d"):
-                st.markdown("#### Exercise D: Circle the correct word or phrase (Stative Verbs)")
-                q_d1 = st.radio("Câu 1: Excuse me, _____ (does the nut cake contain / is the nut cake containing) walnuts?", ["does the nut cake contain", "is the nut cake containing"], index=None, key="qd1")
-                q_d2 = st.radio("Câu 2: I really _____ (don't agree / am not agreeing) that capital punishment deters crime.", ["don't agree", "am not agreeing"], index=None, key="qd2")
-                q_d3 = st.radio("Câu 3: Why _____ (don't you play / aren't you playing) football, Mark?", ["aren't you playing", "don't you play"], index=None, key="qd3")
-                
-                sub_d = st.form_submit_button("🚀 Submit Exercise D")
-                if sub_d:
-                    s_d = 0
-                    if q_d1 == "does the nut cake contain": s_d += 1
-                    if q_d2 == "don't agree": s_d += 1
-                    if q_d3 == "aren't you playing": s_d += 1
-                    st.success(f"Kết quả Exercise D: {s_d}/3 câu đúng!")
+        submit_quiz = st.form_submit_button("🚀 Nộp bài & Kiểm tra Đáp án")
 
-        with tab_g:
-            with st.form("form_ex_g"):
-                st.markdown("#### Exercise G: Present Perfect Simple vs Continuous")
-                q_g1 = st.radio("Câu 1: I _____ (write) ten letters this morning.", ["have written", "have been writing"], index=None, key="qg1")
-                q_g2 = st.radio("Câu 2: I _____ (write) letters all morning.", ["have been writing", "have written"], index=None, key="qg2")
-                
-                sub_g = st.form_submit_button("🚀 Submit Exercise G")
-                if sub_g:
-                    s_g = 0
-                    if q_g1 == "have written": s_g += 1
-                    if q_g2 == "have been writing": s_g += 1
-                    st.success(f"Kết quả Exercise G: {s_g}/2 câu đúng!")
-
-        with tab_b:
-            st.info("📝 Exercise B & C: Luyện tập hoàn thiện cấu trúc câu và từ chỉ thời gian trong Unit 1.")
-        with tab_e:
-            st.info("📝 Exercise E & F: Luyện tập phân biệt nét nghĩa Trạng thái (State) vs Hành động (Action) của động từ.")
-        with tab_h:
-            st.info("📝 Exercise H & I: Luyện tập các dạng bài tập tổng hợp thì Hiện tại hoàn thành đơn và tiếp diễn.")
-
-    elif "Unit 2:" in selected_quiz_unit:
-        with st.form("form_unit2_quiz"):
-            st.markdown("#### Exercise A: Topic Vocabulary - Thinking")
-            q_u2_1 = st.radio("Câu 1: I spent all evening _____ over the decision before accepting the job.", ["mulling", "brushing", "puzzling", "piecing"], index=None, key="qu2_1")
-            q_u2_2 = st.radio("Câu 2: Don't let success go to your _____; stay humble.", ["head", "mind", "brain", "wit"], index=None, key="qu2_2")
+    if submit_quiz:
+        score = 0
+        total = 7
+        st.subheader("📊 Kết quả & Giải thích Đáp án (Answer Key)")
+        
+        if q1.strip().lower() in ["is doing", "'s doing"]:
+            score += 1
+            st.success("✅ Câu 1 đúng! (is doing)")
+        else:
+            st.error("❌ Câu 1 sai! Đáp án đúng: **is doing**. (Giải thích: Tình huống học tập tạm thời kéo dài xung quanh hiện tại).")
             
-            sub_u2 = st.form_submit_button("🚀 Submit Unit 2 Quiz")
-            if sub_u2:
-                s_u2 = 0
-                if q_u2_1 == "mulling": s_u2 += 1
-                if q_u2_2 == "head": s_u2 += 1
-                st.success(f"Kết quả Unit 2: {s_u2}/2 câu đúng!")
+        if q2.strip().lower() in ["doesn't get", "does not get", "doesn't usually get", "does not usually get"]:
+            score += 1
+            st.success("✅ Câu 2 đúng! (doesn't usually get)")
+        else:
+            st.error("❌ Câu 2 sai! Đáp án đúng: **doesn't usually get**. (Giải thích: Thói quen sinh hoạt lặp đi lặp lại).")
+            
+        if q3 == "does / float":
+            score += 1
+            st.success("✅ Câu 3 đúng! (does / float)")
+        else:
+            st.error("❌ Câu 3 sai! Đáp án đúng: **does / float**. (Giải thích: Sự thật khoa học hiển nhiên).")
 
-    elif "Review" in selected_quiz_unit:
-        with st.form("form_review_quiz"):
-            st.markdown(f"#### 📝 Bài tập Tổng hợp {selected_quiz_unit}")
-            q_rev_1 = st.radio("Câu 1: Choose the correct word to complete the sentence in Review:", ["option A", "option B", "option C"], index=None, key="qrev1")
-            sub_rev = st.form_submit_button("🚀 Submit Review Quiz")
-            if sub_rev:
-                st.info("Bài làm đã được ghi nhận!")
+        if q4 == "recognise":
+            score += 1
+            st.success("✅ Câu 4 đúng! (recognise)")
+        else:
+            st.error("❌ Câu 4 sai! Đáp án đúng: **recognise**. (Giải thích: Động từ nhận thức stative verb không dùng tiếp diễn).")
 
-    else:
-        with st.form("form_general_quiz"):
-            st.markdown(f"#### 📝 Bài tập Luyện tập {selected_quiz_unit}")
-            q_gen_1 = st.radio("Câu 1: Choose the correct answer for this advanced sentence:", ["Correct Form A", "Incorrect Form B"], index=None, key="qgen1")
-            sub_gen = st.form_submit_button("🚀 Submit Quiz")
-            if sub_gen:
-                if q_gen_1 == "Correct Form A":
-                    st.success("✅ Đúng! Rất tốt.")
-                else:
-                    st.error("❌ Chưa đúng, hãy kiểm tra lại lý thuyết!")
+        if q5 == "means":
+            score += 1
+            st.success("✅ Câu 5 đúng! (means)")
+        else:
+            st.error("❌ Câu 5 sai! Đáp án đúng: **means**. (Giải thích: Động từ chỉ ý nghĩa stative verb).")
 
-# -----------------------------------------------------------------------------
-# 4. THẺ GHI NHỚ TỪ VỰNG (FLASHCARDS)
-# -----------------------------------------------------------------------------
+        if q6 == "have filled":
+            score += 1
+            st.success("✅ Câu 6 đúng! (have filled)")
+        else:
+            st.error("❌ Câu 6 sai! Đáp án đúng: **have filled**. (Giải thích: Nhấn mạnh kết quả con số cụ thể 'six bags').")
+
+        if q7 == "have been standing":
+            score += 1
+            st.success("✅ Câu 7 đúng! (have been standing)")
+        else:
+            st.error("❌ Câu 7 sai! Đáp án đúng: **have been standing**. (Giải thích: Nhấn mạnh tính liên tục của hành động kéo dài 'all day').")
+
+        percent = int((score / total) * 100)
+        st.info(f"🏆 Điểm số của bạn: **{score}/{total}** ({percent}%)")
+        if percent == 100:
+            st.balloons()
+
 elif menu_option == "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)":
     st.header("🎴 Thẻ ghi nhớ Từ vựng C1/C2 (Vocabulary Flashcards)")
-    
-    vocab_units = [u for u in ALL_LESSONS if "Vocabulary" in u or "Review" in u]
-    selected_fc_unit = st.selectbox("🎯 Chọn Unit Từ vựng hoặc Review:", vocab_units)
-    
-    st.caption("Lật thẻ để ghi nhớ Từ vựng, Phiên âm IPA, Định nghĩa tiếng Anh, Nghĩa tiếng Việt và Ví dụ ngữ cảnh.")
+    st.write("Lật thẻ để ghi nhớ Từ vựng, Phiên âm IPA, Định nghĩa tiếng Anh, Nghĩa tiếng Việt và Ví dụ ngữ cảnh.")
     
     flashcards_data = [
         {
-            "word": "Assess",
-            "ipa": "/əˈses/",
-            "type": "Verb",
-            "def": "To carefully consider a situation, person or problem in order to make a judgment",
-            "vietnamese": "Đánh giá, định giá",
-            "example": "We need to assess the impact of the new policy."
-        },
-        {
-            "word": "Baffle",
-            "ipa": "/ˈbæf.əl/",
-            "type": "Verb",
-            "def": "If a problem or someone's behaviour baffles you, it is so confused or strange that you cannot understand it",
-            "vietnamese": "Làm cản trở, gây bối rối, khó hiểu",
-            "example": "His sudden decision to quit baffled everyone."
+            "word": "Antidisestablishmentarianism",
+            "ipa": "/ˌæn.ti.dɪs.ɪˌstæb.lɪʃ.mənˈteə.ri.ə.nɪ.zəm/",
+            "type": "Noun",
+            "def": "Opposition to the disestablishment of the Church of England",
+            "vietnamese": "Chủ nghĩa chống bãi bỏ giáo hội nhà nước (từ dài nổi tiếng trong Unit 1)",
+            "example": "Could you explain what 'antidisestablishmentarianism' means, please?"
         },
         {
             "word": "Brush up on",
@@ -435,7 +371,7 @@ elif menu_option == "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)":
             "type": "Phrasal Verb",
             "def": "To practice and improve your skills or knowledge of something you learned in the past",
             "vietnamese": "Ôn tập lại, trau dồi lại kiến thức cũ",
-            "example": "I'm going to have to brush up on my German before going to Munich."
+            "example": "I'm going to have to brush up on my German before I go to Munich."
         },
         {
             "word": "Piece together",
@@ -477,16 +413,11 @@ elif menu_option == "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)":
     with st.expander("🔍 LẬT THẺ ĐỂ XEM NGHĨA & VÍ DỤ"):
         st.markdown(f"**📖 Định nghĩa Tiếng Anh:** {card['def']}")
         st.markdown(f"**🇻🇳 Nghĩa Tiếng Việt:** {card['vietnamese']}")
-        st.markdown(f"**💬 Ví dụ ngữ cảnh:** *\"{card['example']}\"*")
+        st.markdown(f"**💬 Ví dụ ngữ cảnh:** *"" + card['example'] + ""*")
 
-# -----------------------------------------------------------------------------
-# 5. GÓC LƯU Ý (WATCH OUT! CORNER)
-# -----------------------------------------------------------------------------
 elif menu_option == "⚠️ Góc lưu ý (Watch Out! Corner)":
     st.header("⚠️ Góc lưu ý C1/C2 (Watch Out! Corner)")
-    
-    selected_wo_unit = st.selectbox("🎯 Chọn Unit để xem lưu ý bẫy thi:", ALL_LESSONS)
-    st.write(f"Tổng hợp các bẫy ngữ pháp và từ vựng nâng cao đặc biệt (Watch out!) cho **{selected_wo_unit}**:")
+    st.write("Tổng hợp các bẫy ngữ pháp và từ vựng nâng cao đặc biệt (Watch out!) từ sách Destination C1 & C2.")
     
     st.markdown("""
     <div class="watchout-box">
@@ -519,25 +450,24 @@ elif menu_option == "⚠️ Góc lưu ý (Watch Out! Corner)":
     </div>
     """, unsafe_allow_html=True)
 
-# -----------------------------------------------------------------------------
-# 6. BÁO CÁO TIẾN ĐỘ HỌC TẬP
-# -----------------------------------------------------------------------------
-elif menu_option == "📊 Báo cáo Tiến độ Học tập":
+elif menu_option == "📊 Báo cáo Tiến độ Học tập (Progress Report)":
     st.header("📊 Báo cáo Tiến độ Học tập")
-    st.write("Đánh dấu các Unit & Review bạn đã hoàn thành để theo dõi tỷ lệ tiến độ toàn khóa học.")
+    st.write("Đánh dấu các Unit bạn đã hoàn thành để theo dõi tỷ lệ tiến độ toàn khóa học.")
+    
+    units = [f"Unit {i}: " + ("Grammar" if i%2!=0 else "Vocabulary") for i in range(1, 27)]
     
     completed_units = []
-    st.subheader(f"✅ Danh sách {len(ALL_LESSONS)} Units & Reviews:")
+    st.subheader("✅ Danh sách 26 Units:")
     
-    cols = st.columns(2)
-    for idx, u in enumerate(ALL_LESSONS):
-        col = cols[idx % 2]
+    cols = st.columns(3)
+    for idx, u in enumerate(units):
+        col = cols[idx % 3]
         checked = col.checkbox(u, key=f"unit_chk_{idx}", value=(idx==0))
         if checked:
             completed_units.append(u)
             
-    progress = len(completed_units) / len(ALL_LESSONS)
+    progress = len(completed_units) / 26
     st.markdown("---")
     st.subheader("📈 Tiến độ hoàn thành toàn bộ khóa học:")
     st.progress(progress)
-    st.info(f"🎉 Bạn đã hoàn thành **{len(completed_units)}/{len(ALL_LESSONS)} mục** ({int(progress*100)}%)")
+    st.info(f"🎉 Bạn đã hoàn thành **{len(completed_units)}/26 Units** ({int(progress*100)}%)")
