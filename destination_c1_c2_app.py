@@ -1,449 +1,447 @@
 import streamlit as st
+import pandas as pd
 
-# Page config
 st.set_page_config(
-    page_title="Destination C1 & C2 Learning Hub",
+    page_title="Destination C1 & C2 Self-Study Hub",
     page_icon="📚",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
-# Custom CSS for polished styling
 st.markdown("""
 <style>
     .main-header {
-        font-size: 2.2rem;
+        font-size: 2.3rem;
         color: #1E3A8A;
-        font-weight: 700;
-        margin-bottom: 0.2rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 0.3rem;
     }
     .sub-header {
         font-size: 1.1rem;
         color: #4B5563;
-        margin-bottom: 1.5rem;
+        text-align: center;
+        margin-bottom: 1.8rem;
     }
-    .badge-c1 {
-        background-color: #3B82F6;
-        color: white;
+    .card {
+        background-color: #F8FAFC;
+        padding: 1.2rem;
+        border-radius: 0.6rem;
+        border-left: 5px solid #2563EB;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .watchout-box {
+        background-color: #FEF2F2;
+        border: 1px solid #FCA5A5;
+        border-left: 5px solid #EF4444;
+        padding: 1.2rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .tip-box {
+        background-color: #F0FDF4;
+        border: 1px solid #86EFAC;
+        border-left: 5px solid #22C55E;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .badge-grammar {
+        background-color: #DBEAFE;
+        color: #1E40AF;
         padding: 0.2rem 0.6rem;
-        border-radius: 12px;
+        border-radius: 0.3rem;
         font-size: 0.85rem;
         font-weight: 600;
     }
-    .watchout-box {
-        background-color: #FFFBEB;
-        border-left: 5px solid #F59E0B;
-        padding: 1.2rem;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-    }
-    .tip-title {
-        color: #B45309;
-        font-weight: 700;
-        font-size: 1.05rem;
-        margin-bottom: 0.5rem;
+    .badge-vocab {
+        background-color: #FCE7F3;
+        color: #9D174D;
+        padding: 0.2rem 0.6rem;
+        border-radius: 0.3rem;
+        font-size: 0.85rem;
+        font-weight: 600;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Session State Initialization
-if 'score' not in st.session_state:
-    st.session_state.score = 0
-if 'completed_units' not in st.session_state:
-    st.session_state.completed_units = []
-if 'flashcard_idx' not in st.session_state:
-    st.session_state.flashcard_idx = 0
+st.markdown('<div class="main-header">📘 DESTINATION C1 & C2: LEARNING HUB</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Hệ thống Tự học Ngữ pháp & Từ vựng Nâng cao (Advanced C1 & C2 Proficiency)</div>', unsafe_allow_html=True)
 
-# --- DATA STRUCTURES GROUNDED IN DESTINATION C1 & C2 ---
-
-UNITS_DATA = {
-    "Unit 1: Grammar - Present time": {
-        "type": "Grammar",
-        "level": "C1/C2",
-        "description": "Các thì hiện tại: Present simple, Emphatic present simple, Present continuous, Present perfect simple, Present perfect continuous, Stative verbs.",
-        "theory": {
-            "Present simple": [
-                ("General truths", "The left-hand side of the brain controls the right-hand side of the body."),
-                ("Current habits", "I don't always go to lectures that are early in the morning!"),
-                ("Permanent situations & states", "Angie teaches French at a local adult education centre."),
-                ("Proverbs & sayings", "Too many cooks spoil the broth."),
-                ("Timetables / Fixed events", "Term ends on 21st December.")
-            ],
-            "Emphatic present simple": [
-                ("To emphasise contrast", "Adam doesn't know much about psychiatry but he DOES know quite a lot about psychology."),
-                ("To emphasise strong feeling", "I DO like playing word games!")
-            ],
-            "Present continuous": [
-                ("Actions happening now / around now", "The boys are doing their homework right now."),
-                ("Annoying / amusing habits (with always)", "Dan's always coming up with the craziest ideas!"),
-                ("Changing and developing situations", "More and more people are recognising the advantages of learning a foreign language.")
-            ],
-            "Stative vs Non-stative Verbs": [
-                ("Stative (Simple tenses)", "I think it's important to know how to use a computer. (think = believe)"),
-                ("Dynamic/Action (Continuous tenses)", "I'm thinking about going on a computer course. (think = consider)")
-            ]
-        },
-        "watch_out": [
-            "Dùng Present Perfect Simple khi đề cập đến số lượng cụ thể: 'I've written two essays this week' (KHÔNG dùng present perfect continuous).",
-            "Dùng Present Perfect Continuous để nhấn mạnh khoảng thời gian kéo dài: 'I've been working here for five years' (nhấn mạnh duration).",
-            "Động từ trạng thái (Stative verbs) như believe, doubt, know, realise, suppose, understand chỉ dùng ở thể đơn, ngoại trừ khi chuyển sang nghĩa hành động."
-        ],
-        "quiz": [
-            {
-                "question": "1. Could you explain what 'antidisestablishmentarianism' _____?",
-                "options": ["means", "is meaning"],
-                "answer": "means",
-                "explanation": "'mean' là stative verb biểu thị ý nghĩa/định nghĩa, không dùng thì tiếp diễn."
-            },
-            {
-                "question": "2. I _____ that woman over there. Wasn't she on that quiz show last night?",
-                "options": ["recognise", "am recognising"],
-                "answer": "recognise",
-                "explanation": "'recognise' là động từ tri giác/trạng thái (perception), dùng Present Simple."
-            },
-            {
-                "question": "3. Right now, my job _____ a huge amount of foreign travel.",
-                "options": ["involves", "is involving"],
-                "answer": "involves",
-                "explanation": "'involve' mô tả thuộc tính/bản chất công việc, dùng Present Simple."
-            },
-            {
-                "question": "4. We _____ the living room repainted so it's probably best if we go into the kitchen.",
-                "options": ["have", "are having"],
-                "answer": "are having",
-                "explanation": "'have' ở đây mang nghĩa hành động (thuê sơn lại nhà), dùng Present Continuous."
-            }
-        ]
-    },
-    "Unit 2: Vocabulary - Thinking and learning": {
-        "type": "Vocabulary",
-        "level": "C1/C2",
-        "description": "Từ vựng chủ đề Tư duy & Học tập, Phrasal Verbs, Idioms, Collocations và Word Formation.",
-        "theory": {
-            "Topic Vocabulary": [
-                ("assess (v)", "Đánh giá bản chất, giá trị hoặc khả năng của cái gì."),
-                ("baffle (v)", "Gây bối rối, hoàn toàn không thể hiểu được."),
-                ("cynical (adj)", "Hoài nghi về lòng tốt hoặc sự chân thành của con người."),
-                ("dubious (adj)", "Mơ hồ, đáng ngờ, nghi ngại."),
-                ("ingenious (adj)", "Khéo léo, thông minh, phát minh độc đáo."),
-                ("plausible (adj)", "Hợp lý, có vẻ đúng, đáng tin cậy.")
-            ],
-            "Phrasal Verbs": [
-                ("brush up (on)", "Rèn luyện, ôn lại để cải thiện kỹ năng/kiến thức."),
-                ("come around (to)", "Thay đổi ý kiến/quan điểm vì bị thuyết phục."),
-                ("come up with", "Nghĩ ra một ý tưởng, kế hoạch."),
-                ("face up to", "Chấp nhận và đối mặt với thực tế khó khăn."),
-                ("mull over", "Suy ngẫm, cân nhắc kỹ lưỡng trong một khoảng thời gian."),
-                ("piece together", "Xâu chuỗi các manh mối/thông tin để hiểu sự thật.")
-            ],
-            "Idioms": [
-                ("go to your head", "Thành công khiến ai đó trở nên kiêu ngạo."),
-                ("have your wits about you", "Tỉnh táo, suy nghĩ nhanh để đưa ra quyết định đúng."),
-                ("not see the wood for the trees", "Quá chú ý chi tiết nhỏ mà không thấy bức tranh toàn cảnh."),
-                ("quick / slow on the uptake", "Nảy số nhanh / tiếp thu chậm."),
-                ("ring a bell", "Nghe quen quen nhưng không nhớ rõ chi tiết.")
-            ],
-            "Word Formation": [
-                ("assume", "assumption, assuming, unassuming, assumed"),
-                ("conceive", "concept, conception, conceptual, (in)conceivable, (in)conceivably"),
-                ("rational", "rationalise, rationalisation, rationalist, rationalism, (ir)rationality, (ir)rational(ly)"),
-                ("sane", "(in)sanity, insane(ly)")
-            ]
-        },
-        "watch_out": [
-            "Phân biệt 'cynical' (hoài nghi nhân cách con người) và 'sceptical/skeptical' (hoài nghi tính đúng đắn của thông tin/kế hoạch).",
-            "Phrasal verb 'swot up (on)' nghĩa là học dồn, học chăm chỉ trước kỳ thi (tương tự 'cram')."
-        ],
-        "quiz": [
-            {
-                "question": "1. I spent all evening _____ over the decision before finally deciding to accept the job.",
-                "options": ["mulling", "brushing", "puzzling", "piecing"],
-                "answer": "mulling",
-                "explanation": "'mull over' nghĩa là suy ngẫm, cân nhắc kỹ lưỡng một quyết định."
-            },
-            {
-                "question": "2. Don't let success go to your _____; stay humble and keep working hard.",
-                "options": ["head", "mind", "brain", "wit"],
-                "answer": "head",
-                "explanation": "Idiom 'go to your head' nghĩa là bị sự thành công làm cho kiêu ngạo."
-            },
-            {
-                "question": "3. The proposal sounds completely _____ and well-thought-out.",
-                "options": ["plausible", "dubious", "baffled", "naive"],
-                "answer": "plausible",
-                "explanation": "'plausible' có nghĩa là hợp lý, khả thi, đáng tin."
-            }
-        ]
-    },
-    "Unit 11: Grammar - Conditionals": {
-        "type": "Grammar",
-        "level": "C1/C2",
-        "description": "Câu điều kiện nâng cao (Zero, 1st, 2nd, 3rd, Mixed Conditionals, Inversion/Đảo ngữ câu điều kiện).",
-        "theory": {
-            "Conditionals Structure": [
-                ("Zero Conditional", "If/when/whenever + present, present (Sự thật khoa học / Chân lý)"),
-                ("First Conditional", "If + present, will + bare inf / imperative (Điều kiện có thật ở hiện tại/tương lai)"),
-                ("Second Conditional", "If + past simple/continuous, would + bare inf (Giả định trái thực tế hiện tại)"),
-                ("Third Conditional", "If + past perfect, would have + past participle (Giả định trái thực tế quá khứ)"),
-                ("Mixed Conditionals", "If + past perfect (quá khứ), would + bare inf (kết quả ở hiện tại)")
-            ],
-            "Inversion (Đảo ngữ)": [
-                ("Type 1", "Should you need any assistance, please do not hesitate to ask."),
-                ("Type 2", "Were I in your position, I would accept the offer."),
-                ("Type 3", "Had we known about the delay, we would have taken an earlier train.")
-            ]
-        },
-        "watch_out": [
-            "Trong văn phong trang trọng (Formal/British English), 'were' được dùng cho tất cả các ngôi trong câu điều kiện loại 2 (If I were / If he were).",
-            "Có thể dùng các từ nối thay thế 'If' như: provided (that), providing (that), as long as, condition that, suppose, supposing, unless."
-        ],
-        "quiz": [
-            {
-                "question": "1. _____ known about the traffic jam, I would have left home half an hour earlier.",
-                "options": ["Had I", "Should I", "Were I", "If I"],
-                "answer": "Had I",
-                "explanation": "Cấu trúc đảo ngữ câu điều kiện loại 3: Had + S + V3/ed..."
-            },
-            {
-                "question": "2. If I _____ you, I would consult a legal expert before signing.",
-                "options": ["were", "am", "would be", "had been"],
-                "answer": "were",
-                "explanation": "Câu điều kiện loại 2 giả định trái với thực tế hiện tại."
-            }
-        ]
-    }
-}
-
-FLASHCARDS = [
-    {"word": "assess (v)", "pos": "verb", "def": "evaluate or estimate the nature, ability, or quality of", "vi": "đánh giá, định giá", "ex": "It's difficult to assess the impact of the new policy."},
-    {"word": "baffle (v)", "pos": "verb", "def": "totally bewilder, confuse or perplex", "vi": "gây bối rối, làm kinh ngạc", "ex": "His sudden decision to quit baffled everyone in the office."},
-    {"word": "brush up (on)", "pos": "phrasal verb", "def": "practise and improve your skills or knowledge of something", "vi": "ôn luyện, trau dồi lại", "ex": "I need to brush up on my French before visiting Paris."},
-    {"word": "go to your head", "pos": "idiom", "def": "cause someone to become arrogant or overconfident", "vi": "làm cho ai đó mắc bệnh ngôi sao / kiêu ngạo", "ex": "Don't let that promotion go to your head!"},
-    {"word": "not see the wood for the trees", "pos": "idiom", "def": "be unable to understand what is important because you are paying too much attention to details", "vi": "không thấy bức tranh toàn cảnh do quá chú ý tiểu tiết", "ex": "He was so focused on formatting that he couldn't see the wood for the trees."}
-]
-
-# --- SIDEBAR NAVIGATION ---
-st.sidebar.title("📚 Destination C1 & C2")
-st.sidebar.caption("Hệ thống Tự học Ngữ pháp & Từ vựng Nâng cao")
-
-menu = st.sidebar.radio(
-    "Danh mục học tập",
+st.sidebar.title("📌 MENU CHÍNH")
+menu_option = st.sidebar.radio(
+    "Chọn chức năng:",
     [
-        "📌 Tổng quan & Lộ trình",
-        "📖 Góc Lý thuyết (Theory)",
-        "✍️ Luyện tập Tương tác (Quiz)",
-        "🎴 Thẻ từ vựng (Flashcards)",
-        "⚠️ Góc Bẫy thi (Watch Out!)",
-        "📊 Tiến độ Học tập"
+        "📌 Tổng quan & Lộ trình tự học",
+        "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)",
+        "✍️ Bài tập Tương tác & Chấm điểm tự động",
+        "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)",
+        "⚠️ Góc lưu ý (Watch Out! Corner)",
+        "📊 Báo cáo Tiến độ Học tập"
     ]
 )
 
-st.sidebar.markdown("---")
-st.sidebar.markdown("**Thông tin sách:**")
-st.sidebar.write("• Tác giả: Malcolm Mann & Steve Taylore-Knowles")
-st.sidebar.write("• Trình độ: C1 & C2 (CAE / CPE)")
-st.sidebar.write("• Cấu trúc: 26 Units + 13 Reviews")
-
-# --- MAIN CONTENT PAGES ---
-
-# 1. OVERVIEW PAGE
-if menu == "📌 Tổng quan & Lộ trình":
-    st.markdown('<div class="main-header">Destination C1 & C2: Learning Hub</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Nền tảng hỗ trợ học sinh tự học Ngữ pháp & Từ vựng Tiếng Anh C1 & C2 tại nhà</div>', unsafe_allow_html=True)
+if menu_option == "📌 Tổng quan & Lộ trình tự học":
+    st.header("📌 Tổng quan Sách & Lộ trình Tự học")
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns([3, 2])
+    
     with col1:
-        st.metric(label="Tổng số Bài học", value="26 Units", delta="13 Grammar + 13 Vocab")
+        st.markdown("""
+        ### 📚 Cấu trúc bộ sách Destination C1 & C2
+        Sách gồm **26 Units** đan xen giữa Ngữ pháp và Từ vựng nâng cao, đáp ứng chuẩn đầu ra kỳ thi **Cambridge CAE (C1)** & **CPE (C2)**:
+        
+        * **13 Unit Ngữ pháp (Grammar Units)**: Hệ thống quy tắc chuyên sâu, cấu trúc câu nâng cao và các ngoại lệ.
+        * **13 Unit Từ vựng (Vocabulary Units)**: Phân loại từ vựng theo chủ đề (*Topic Vocabulary*), Cụm động từ (*Phrasal Verbs*), Thành ngữ (*Idioms*), Cụm từ cố định (*Collocations*) và Cấu tạo từ (*Word Formation*).
+        * **13 Bài Ôn tập (Reviews)**: Ôn tập định kỳ sau mỗi 2 Units.
+        * **Bài kiểm tra Tiến độ & Tổng hợp**: 2 bài *Progress Tests* và 6 bài *Revision Tests* hệ thống lại kiến thức.
+        """)
+        
+        st.markdown("""
+        ### 🗺️ Lộ trình 4 bước tự học thẩm thấu kiến thức
+        1. **Bước 1 (Theory Hub)**: Nắm vững bảng lý thuyết ngữ pháp và danh mục từ vựng chuẩn Cambridge.
+        2. **Bước 2 (Watch Out! Corner)**: Điểm lại các bẫy ngữ pháp và lỗi sai phổ biến mà thí sinh C1/C2 thường mắc phải.
+        3. **Bước 3 (Interactive Quiz)**: Luyện tập bài tập tương tác, kiểm tra đáp án tự động và đọc giải thích chi tiết.
+        4. **Bước 4 (Flashcards)**: Ôn luyện phản xạ từ vựng hàng ngày bằng thẻ ghi nhớ thông minh.
+        """)
+
     with col2:
-        st.metric(label="Bài Ôn tập & Kiểm tra", value="21 Tests", delta="13 Reviews + 8 Tests")
-    with col3:
-        st.metric(label="Mục tiêu Trình độ", value="C1 & C2", delta="Cambridge CAE & CPE")
+        st.info("📋 **SƠ ĐỒ 26 UNITS TRONG SÁCH**")
         
-    st.markdown("---")
-    st.subheader("🎯 Lộ trình Tự học Chuẩn hóa")
-    st.write("""
-    Mỗi bài học trong sách **Destination C1 & C2** được thiết kế đan xen giữa **1 bài Ngữ pháp (Grammar)** và **1 bài Từ vựng (Vocabulary)** theo chủ đề. 
-    Hệ thống Web này giúp bạn thẩm thấu kiến thức qua 4 bước:
-    1. **Nắm vững Lý thuyết**: Tra cứu quy tắc ngữ pháp dạng bảng so sánh và hệ thống từ vựng chủ đề, cụm động từ, thành ngữ.
-    2. **Phòng tránh Bẫy thi (Watch Out!)**: Ghi nhớ các lỗi sai kinh điển người học thường mắc phải trong bài thi CAE/CPE.
-    3. **Luyện bài tập tương tác**: Làm bài trực tiếp có chấm điểm tự động và giải thích chi tiết.
-    4. **Ghi nhớ lâu với Flashcards**: Thẻ từ vựng thông minh hỗ trợ tra cứu nghĩa, từ loại và ví dụ thực tế.
-    """)
-    
-    st.markdown("### 📋 Danh sách Units chính trong sách:")
-    st.table([
-        {"Unit": "Unit 1", "Chủ đề": "Grammar: Present time", "Trình độ": "C1/C2"},
-        {"Unit": "Unit 2", "Chủ đề": "Vocabulary: Thinking and learning", "Trình độ": "C1/C2"},
-        {"Unit": "Unit 3", "Chủ đề": "Grammar: Past time", "Trình độ": "C1/C2"},
-        {"Unit": "Unit 4", "Chủ đề": "Vocabulary: Change and technology", "Trình độ": "C1/C2"},
-        {"Unit": "Unit 5", "Chủ đề": "Grammar: Future time", "Trình độ": "C1/C2"},
-        {"Unit": "Unit 6", "Chủ đề": "Vocabulary: Time and work", "Trình độ": "C1/C2"},
-        {"Unit": "Unit 11", "Chủ đề": "Grammar: Conditionals", "Trình độ": "C1/C2"},
-        {"Unit": "Unit 13", "Chủ đề": "Grammar: Unreal time", "Trình độ": "C1/C2"}
-    ])
+        units_data = [
+            {"Unit": "Unit 1", "Type": "Grammar", "Topic": "Present time"},
+            {"Unit": "Unit 2", "Type": "Vocabulary", "Topic": "Thinking and learning"},
+            {"Unit": "Unit 3", "Type": "Grammar", "Topic": "Past time"},
+            {"Unit": "Unit 4", "Type": "Vocabulary", "Topic": "Change and technology"},
+            {"Unit": "Unit 5", "Type": "Grammar", "Topic": "Future time"},
+            {"Unit": "Unit 6", "Type": "Vocabulary", "Topic": "Time and work"},
+            {"Unit": "Unit 7", "Type": "Grammar", "Topic": "Passives and causatives"},
+            {"Unit": "Unit 8", "Type": "Vocabulary", "Topic": "Movement and transport"},
+            {"Unit": "Unit 9", "Type": "Grammar", "Topic": "Modals and semi-modals"},
+            {"Unit": "Unit 10", "Type": "Vocabulary", "Topic": "Communication and the media"},
+            {"Unit": "Unit 11", "Type": "Grammar", "Topic": "Conditionals"},
+            {"Unit": "Unit 12", "Type": "Vocabulary", "Topic": "Chance and nature"},
+            {"Unit": "Unit 13", "Type": "Grammar", "Topic": "Unreal time"},
+            {"Unit": "Unit 14", "Type": "Vocabulary", "Topic": "Quantity and money"}
+        ]
+        df_units = pd.DataFrame(units_data)
+        st.dataframe(df_units, use_container_width=True, height=380)
 
-# 2. THEORY PAGE
-elif menu == "📖 Góc Lý thuyết (Theory)":
-    st.markdown('<div class="main-header">📖 Tra cứu Lý thuyết Trọng tâm</div>', unsafe_allow_html=True)
-    selected_unit_key = st.selectbox("Chọn Unit muốn học:", list(UNITS_DATA.keys()))
+elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
+    st.header("📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)")
     
-    unit_info = UNITS_DATA[selected_unit_key]
+    selected_unit = st.selectbox(
+        "🎯 Chọn Unit cần tra cứu:",
+        [
+            "Unit 1: Grammar - Present time",
+            "Unit 2: Vocabulary - Thinking and learning",
+            "Unit 3: Grammar - Past time (Đang cập nhật)",
+            "Unit 4: Vocabulary - Change and technology (Đang cập nhật)"
+        ]
+    )
     
-    st.markdown(f"### {selected_unit_key}")
-    st.markdown(f"**Trình độ:** <span class='badge-c1'>{unit_info['level']}</span> | **Mô tả:** {unit_info['description']}", unsafe_allow_html=True)
-    st.markdown("---")
-    
-    if unit_info["type"] == "Grammar":
-        tab1, tab2 = st.tabs(["📌 Cấu trúc & Quy tắc Ngữ pháp", "⚠️ Hộp Lưu ý (Watch Out!)"])
-        with tab1:
-            for rule_title, examples in unit_info["theory"].items():
-                st.markdown(f"#### 🔹 {rule_title}")
-                for usage, sentence in examples:
-                    st.markdown(f"- **{usage}**: *{sentence}*")
-                st.markdown("<br>", unsafe_allow_html=True)
-        with tab2:
-            st.warning("Các điểm ngữ pháp hay bẫy học sinh trong bài thi:")
-            for wo in unit_info["watch_out"]:
-                st.markdown(f"- {wo}")
-                
-    elif unit_info["type"] == "Vocabulary":
-        tab1, tab2, tab3 = st.tabs(["📚 Từ vựng Chủ đề & Phrasal Verbs", "💡 Idioms & Collocations", "🔤 Word Formation"])
-        with tab1:
-            col_v1, col_v2 = st.columns(2)
-            with col_v1:
-                st.markdown("#### Topic Vocabulary")
-                for w, d in unit_info["theory"].get("Topic Vocabulary", []):
-                    st.markdown(f"• **{w}**: {d}")
-            with col_v2:
-                st.markdown("#### Phrasal Verbs")
-                for pv, m in unit_info["theory"].get("Phrasal Verbs", []):
-                    st.markdown(f"• **{pv}**: {m}")
-        with tab2:
-            st.markdown("#### Idioms")
-            for idm, m in unit_info["theory"].get("Idioms", []):
-                st.markdown(f"• **{idm}**: {m}")
-        with tab3:
-            st.markdown("#### Word Formation Database")
-            for base, derivs in unit_info["theory"].get("Word Formation", []):
-                st.markdown(f"• **{base}** ➔ `{derivs}`")
-
-# 3. QUIZ PRACTICE PAGE
-elif menu == "✍️ Luyện tập Tương tác (Quiz)":
-    st.markdown('<div class="main-header">✍️ Bài tập Tương tác & Luyện đề</div>', unsafe_allow_html=True)
-    selected_quiz_unit = st.selectbox("Chọn bài tập theo Unit:", list(UNITS_DATA.keys()), key="quiz_unit_select")
-    
-    quiz_list = UNITS_DATA[selected_quiz_unit]["quiz"]
-    
-    st.info("Hãy chọn đáp án đúng cho mỗi câu hỏi dưới đây và ấn nút **Kiểm tra Đáp án**.")
-    
-    user_answers = {}
-    with st.form("quiz_form"):
-        for i, q in enumerate(quiz_list):
-            st.markdown(f"**Question {i+1}:** {q['question']}")
-            user_answers[i] = st.radio(
-                f"Lựa chọn cho câu {i+1}:", 
-                q['options'], 
-                key=f"q_{selected_quiz_unit}_{i}",
-                index=0
-            )
-            st.markdown("---")
+    if "Unit 1" in selected_unit:
+        st.subheader("Unit 1: Present time (Các thì Hiện tại)")
+        
+        tab_g1, tab_g2, tab_g3, tab_g4, tab_stative = st.tabs([
+            "1. Present Simple & Emphatic",
+            "2. Present Continuous",
+            "3. Present Perfect Simple",
+            "4. Present Perfect Continuous",
+            "5. Stative Verbs & US/UK Notes"
+        ])
+        
+        with tab_g1:
+            st.markdown("#### 🔹 Present Simple (Thì Hiện tại Đơn)")
+            g1_data = [
+                {"Cách dùng": "General truths (Sự thật hiển nhiên)", "Ví dụ minh họa": "The left-hand side of the brain controls the right-hand side of the body."},
+                {"Cách dùng": "Current habits (Thói quen hiện tại)", "Ví dụ minh họa": "I don't always go to lectures that are early in the morning!"},
+                {"Cách dùng": "Permanent situations & states (Tình trạng lâu dài)", "Ví dụ minh họa": "Angie teaches French at a local adult education centre."},
+                {"Cách dùng": "Telling jokes & informal stories (Kể chuyện phiếm)", "Ví dụ minh họa": "So, a man goes to see his psychiatrist..."},
+                {"Cách dùng": "Live sports commentary (Bình luận trực tiếp)", "Ví dụ minh họa": "Adams passes to Kareshi. It's a goal!"},
+                {"Cách dùng": "Newspaper headlines (Tiêu đề báo chí)", "Ví dụ minh họa": "HAWKING WINS NOBEL PRIZE"},
+                {"Cách dùng": "Reviews & summaries (Tóm tắt phim/sách)", "Ví dụ minh họa": "The film ends with us not knowing whether they survived."},
+                {"Cách dùng": "Instructions & directions (Hướng dẫn chỉ đường)", "Ví dụ minh họa": "You turn left at the end of the road."},
+                {"Cách dùng": "Proverbs & sayings (Tục ngữ, thành ngữ)", "Ví dụ minh họa": "Too many cooks spoil the broth."},
+                {"Cách dùng": "Fixed future events (Lịch trình cố định)", "Ví dụ minh họa": "Term ends on 21st December."}
+            ]
+            st.table(pd.DataFrame(g1_data))
             
-        submitted = st.form_submit_button("🚀 Submit Answers / Kiểm tra Đáp án")
+            st.markdown("""
+            <div class="tip-box">
+            <b>💡 Emphatic Present Simple (Hiện tại đơn nhấn mạnh):</b><br>
+            Sử dụng <code>do / does + V-bare</code> để nhấn mạnh sự tương phản hoặc cảm xúc mạnh mẽ:<br>
+            • <i>Adam doesn't know much about psychiatry but he <b>does know</b> quite a lot about psychology.</i><br>
+            • <i>I <b>do like</b> playing word games!</i>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.caption("Từ/Cụm từ hay đi kèm: always, usually, generally, often, sometimes, rarely, seldom, never, whenever, nowadays, these days, from time to time, every now and then, most/much of the time.")
+
+        with tab_g2:
+            st.markdown("#### 🔹 Present Continuous (Thì Hiện tại Tiếp diễn)")
+            g2_data = [
+                {"Cách dùng": "Actions happening now (Hành động đang diễn ra)", "Ví dụ minh họa": "The boys are doing their homework right now."},
+                {"Cách dùng": "Actions happening around now (Hành động xung quanh hiện tại)", "Ví dụ minh họa": "What book are you doing in English at the moment?"},
+                {"Cách dùng": "Temporary situations (Tình huống tạm thời)", "Ví dụ minh họa": "We aren't having any exams while the lecturers are on strike."},
+                {"Cách dùng": "Changing & developing situations (Sự thay đổi phát triển)", "Ví dụ minh họa": "More and more people are recognising the advantages of learning languages."},
+                {"Cách dùng": "Annoying / amusing habits with 'always' (Thói quen gây phiền phức)", "Ví dụ minh họa": "Dan's always coming up with the craziest ideas!"},
+                {"Cách dùng": "Future arrangements (Kế hoạch tương lai đã sắp xếp)", "Ví dụ minh họa": "When are you taking your driving test?"}
+            ]
+            st.table(pd.DataFrame(g2_data))
+
+        with tab_g3:
+            st.markdown("#### 🔹 Present Perfect Simple (Thì Hiện tại Hoàn thành Đơn)")
+            g3_data = [
+                {"Cách dùng": "Situations/states started in past & still true (Kéo dài đến hiện tại)", "Ví dụ minh họa": "I've been a member of MENSA for over five years."},
+                {"Cách dùng": "Series of actions continuing up to now (Chuỗi hành động)", "Ví dụ minh họa": "She's done a BA, an MA and a PhD so far."},
+                {"Cách dùng": "Completed actions at unspecified past time (Đã xong, không rõ thời gian)", "Ví dụ minh họa": "Have you ever read any books by Edward De Bono?"},
+                {"Cách dùng": "Completed actions with important present result (Kết quả ở hiện tại)", "Ví dụ minh họa": "She's been awarded a scholarship to study at Harvard."},
+                {"Cách dùng": "Actions completed recently (Vừa mới hoàn thành)", "Ví dụ minh họa": "I've just received my exam results."}
+            ]
+            st.table(pd.DataFrame(g3_data))
+
+        with tab_g4:
+            st.markdown("#### 🔹 Present Perfect Continuous (Thì Hiện tại Hoàn thành Tiếp diễn)")
+            g4_data = [
+                {"Cách dùng": "Actions continuing up to present / just before present (Nhấn mạnh tính liên tục/thời lượng)", "Ví dụ minh họa": "We've all been wondering what to get Tony for his birthday."},
+                {"Cách dùng": "Future in time clauses (Hành động hoàn thành trong mệnh đề thời gian)", "Ví dụ minh họa": "I won't take my driving test until I've been having lessons for two months."}
+            ]
+            st.table(pd.DataFrame(g4_data))
+
+        with tab_stative:
+            st.markdown("#### 🔹 Stative Verbs (Động từ Chỉ Trạng thái)")
+            st.write("Động từ chỉ trạng thái thường **không** dùng ở thì tiếp diễn:")
+            
+            st.markdown("""
+            * **Communication**: agree, deny, disagree
+            * **Thinking**: believe, consider, doubt, expect, imagine, know, mean, realise, suppose, suspect, think, understand
+            * **Existence**: be, exist
+            * **Emotions**: adore, appeal, appreciate, desire, despise, detest, dislike, envy, fear, feel, forgive, hate, like, love, mind, need, pity, prefer, satisfy, trust, want, wish
+            * **Perception**: appear, hear, look, notice, recognise, resemble, see, seem, smell, sound, taste
+            * **Possession**: belong, concern, consist, contain, cost, depend, equal, fit, have, include, lack, measure, owe, own, possess, suit, weigh
+            * **Other**: deserve, matter
+            """)
+            
+            st.markdown("""
+            <div class="watchout-box">
+            <b>⚠️ Động từ vừa là Stative vừa là Dynamic (Action):</b><br>
+            Các động từ như <i>appeal, be, consider, depend, feel, have, include, look, mean, mind, see, smell, taste, think, weigh</i> có thể dùng ở thì tiếp diễn khi diễn tả <b>hành động</b> thay vì trạng thái:<br>
+            • <i>I <b>think</b> it's important to know how to use a computer.</i> (Trạng thái: think = believe)<br>
+            • <i>I'm <b>thinking</b> about going on a computer course.</i> (Hành động: think = consider)
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("#### 🇺🇸 US vs 🇬🇧 UK Grammar Differences")
+            st.info("""
+            * Trong tiếng Anh-Mỹ (US), Thì Quá khứ đơn thường được dùng thay cho Hiện tại hoàn thành:
+              * US: Did you find the answer yet? | UK: Have you found the answer yet?
+            * Trong tiếng Anh-Mỹ thân mật, **gotten** được dùng làm quá khứ phân từ của *get* (nghĩa là obtain/become/move):
+              * US: I haven't gotten the books yet. | UK: I haven't got the books yet.
+            """)
+
+    elif "Unit 2" in selected_unit:
+        st.subheader("Unit 2: Vocabulary - Thinking and learning")
+        st.write("Danh mục từ vựng, Phrasal Verbs, Idioms, Word Formation kèm phiên âm IPA, Định nghĩa tiếng Anh & Nghĩa tiếng Việt (Tra cứu cuối sách):")
         
-    if submitted:
+        vocab_list = [
+            {"Word": "assess (v)", "IPA": "/əˈses/", "Definition": "to carefully consider a situation, person or problem in order to make a judgment", "Vietnamese": "đánh giá, định giá", "Example": "We need to assess the impact of the new policy."},
+            {"Word": "baffle (v)", "IPA": "/ˈbæf.əl/", "Definition": "if a problem or someone's behaviour baffles you, it is so confused or strange that you cannot understand it", "Vietnamese": "làm cản trở, gây khó hiểu", "Example": "His sudden decision to quit baffled everyone."},
+            {"Word": "cynical (adj)", "IPA": "/ˈsɪn.ɪ.kəl/", "Definition": "believing that people are only interested in themselves and are not honest or sincere", "Vietnamese": "hoài nghi, nhạo đời", "Example": "I'm a bit cynical about their motives."},
+            {"Word": "deduce (v)", "IPA": "/dɪˈdjuːs/", "Definition": "to know something by considering the information or evidence that you have", "Vietnamese": "suy luận, suy ra", "Example": "Finding the bloody weapon allowed the police to deduce that a murder had occurred."},
+            {"Word": "dubious (adj)", "IPA": "/ˈdʒuː.bi.əs/", "Definition": "thought not to be completely true or not able to be trusted", "Vietnamese": "mơ hồ, đáng nghi ngờ", "Example": "The story was dynamic, but its authenticity remained dubious."},
+            {"Word": "mull over (phr v)", "IPA": "/mʌl ˈəʊ.vər/", "Definition": "to think carefully about something for a long time", "Vietnamese": "suy ngẫm, cân nhắc kỹ", "Example": "I'll mull over your proposal this weekend."},
+            {"Word": "ring a bell (idiom)", "IPA": "/rɪŋ ə bel/", "Definition": "sounds familiar, but you cannot remember the exact details", "Vietnamese": "nghe quen thuộc", "Example": "Her name rings a bell, but I can't place her."}
+        ]
+        st.table(pd.DataFrame(vocab_list))
+
+elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự động":
+    st.header("✍️ Bài tập Tương tác Unit 1: Present time")
+    st.write("Trích lọc hệ thống câu hỏi bài tập từ Unit 1 với đáp án chuẩn cuối sách và lời giải thích chi tiết.")
+    
+    with st.form("quiz_unit1_form"):
+        st.markdown("#### 📝 Exercise A: Write the verb in brackets in the correct form (Present Simple or Present Continuous)")
+        
+        q1 = st.text_input("1. My brother ________ (do) a degree at university so I don't see him very often, unfortunately.", key="q1")
+        q2 = st.text_input("2. Darren usually ________ (get) home until about eight o'clock.", key="q2")
+        q3 = st.radio("3. Why ________ ice ________ (float)?", ["does / float", "is / floating", "do / floats"], key="q3")
+        q4 = st.radio("4. I think I ________ (recognise) that woman over there. Wasn't she on that quiz show?", ["recognise", "am recognising", "recognised"], key="q4")
+        q5 = st.radio("5. Could you explain what 'antidisestablishmentarianism' ________ (mean), please?", ["means", "is meaning", "mean"], key="q5")
+        
+        st.markdown("#### 📝 Exercise G: Circle the correct word or phrase (Present Perfect Simple vs Continuous)")
+        q6 = st.radio("6. They ________ six bags with rubbish from the beach already.", ["have filled", "have been filling", "fill"], key="q6")
+        q7 = st.radio("7. I ________ up all day and my feet are killing me!", ["have been standing", "have stood", "am standing"], key="q7")
+
+        submit_quiz = st.form_submit_button("🚀 Nộp bài & Kiểm tra Đáp án")
+
+    if submit_quiz:
         score = 0
-        st.markdown("### 📊 Kết quả Bài làm:")
-        for i, q in enumerate(quiz_list):
-            if user_answers[i] == q['answer']:
-                score += 1
-                st.success(f"✅ **Câu {i+1}: Chính xác!** ({q['answer']})")
-            else:
-                st.error(f"❌ **Câu {i+1}: Chưa đúng.** Đáp án đúng là **{q['answer']}** (Bạn chọn: {user_answers[i]})")
-            st.caption(f"💡 *Giải thích:* {q['explanation']}")
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-        final_score = int((score / len(quiz_list)) * 100)
-        st.metric("Điểm số của bạn", f"{final_score}%", f"{score}/{len(quiz_list)} câu đúng")
+        total = 7
+        st.subheader("📊 Kết quả & Giải thích Đáp án (Answer Key)")
         
-        if selected_quiz_unit not in st.session_state.completed_units:
-            st.session_state.completed_units.append(selected_quiz_unit)
-
-# 4. FLASHCARDS PAGE
-elif menu == "🎴 Thẻ từ vựng (Flashcards)":
-    st.markdown('<div class="main-header">🎴 Flashcards Từ vựng & Cụm từ C1/C2</div>', unsafe_allow_html=True)
-    st.caption("Lật thẻ để học từ vựng, phrasal verbs và idioms trọng tâm.")
-    
-    total_fc = len(FLASHCARDS)
-    curr_idx = st.session_state.flashcard_idx
-    card = FLASHCARDS[curr_idx]
-    
-    col_fc, _ = st.columns([2, 1])
-    with col_fc:
-        st.markdown(f"""
-        <div style="background-color: #EFF6FF; border: 2px solid #3B82F6; border-radius: 12px; padding: 2rem; text-align: center; min-height: 220px;">
-            <span style="background-color: #DBEAFE; color: #1E40AF; padding: 4px 12px; border-radius: 10px; font-weight: 600; font-size: 0.85rem;">{card['pos'].upper()}</span>
-            <h2 style="color: #1E3A8A; margin-top: 10px;">{card['word']}</h2>
-            <hr style="border: 0.5px solid #BFDBFE;">
-            <p style="font-size: 1.1rem; color: #1F2937;"><b>Định nghĩa (English):</b> {card['def']}</p>
-            <p style="font-size: 1.1rem; color: #059669;"><b>Nghĩa tiếng Việt:</b> {card['vi']}</p>
-            <p style="font-style: italic; color: #4B5563;"><b>Ví dụ:</b> "{card['ex']}"</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    c_prev, c_next, _ = st.columns([1, 1, 3])
-    with c_prev:
-        if st.button("⬅️ Thẻ trước"):
-            st.session_state.flashcard_idx = (curr_idx - 1) % total_fc
-            st.rerun()
-    with c_next:
-        if st.button("Thẻ tiếp ➡️"):
-            st.session_state.flashcard_idx = (curr_idx + 1) % total_fc
-            st.rerun()
+        if q1.strip().lower() in ["is doing", "'s doing"]:
+            score += 1
+            st.success("✅ Câu 1 đúng! (is doing)")
+        else:
+            st.error("❌ Câu 1 sai! Đáp án đúng: **is doing**. (Giải thích: Tình huống học tập tạm thời kéo dài xung quanh hiện tại).")
             
-    st.caption(f"Thẻ {curr_idx + 1} / {total_fc}")
+        if q2.strip().lower() in ["doesn't get", "does not get", "doesn't usually get", "does not usually get"]:
+            score += 1
+            st.success("✅ Câu 2 đúng! (doesn't usually get)")
+        else:
+            st.error("❌ Câu 2 sai! Đáp án đúng: **doesn't usually get**. (Giải thích: Thói quen sinh hoạt lặp đi lặp lại).")
+            
+        if q3 == "does / float":
+            score += 1
+            st.success("✅ Câu 3 đúng! (does / float)")
+        else:
+            st.error("❌ Câu 3 sai! Đáp án đúng: **does / float**. (Giải thích: Sự thật khoa học hiển nhiên).")
 
-# 5. WATCH OUT PAGE
-elif menu == "⚠️ Góc Bẫy thi (Watch Out!)":
-    st.markdown('<div class="main-header">⚠️ Góc Bẫy Ngữ Pháp & Từ Vựng (Watch Out!)</div>', unsafe_allow_html=True)
-    st.write("Những điểm lưu ý quan trọng giúp bạn không mất điểm đáng tiếc trong kỳ thi Cambridge CAE & CPE:")
+        if q4 == "recognise":
+            score += 1
+            st.success("✅ Câu 4 đúng! (recognise)")
+        else:
+            st.error("❌ Câu 4 sai! Đáp án đúng: **recognise**. (Giải thích: Động từ nhận thức stative verb không dùng tiếp diễn).")
+
+        if q5 == "means":
+            score += 1
+            st.success("✅ Câu 5 đúng! (means)")
+        else:
+            st.error("❌ Câu 5 sai! Đáp án đúng: **means**. (Giải thích: Động từ chỉ ý nghĩa stative verb).")
+
+        if q6 == "have filled":
+            score += 1
+            st.success("✅ Câu 6 đúng! (have filled)")
+        else:
+            st.error("❌ Câu 6 sai! Đáp án đúng: **have filled**. (Giải thích: Nhấn mạnh kết quả con số cụ thể 'six bags').")
+
+        if q7 == "have been standing":
+            score += 1
+            st.success("✅ Câu 7 đúng! (have been standing)")
+        else:
+            st.error("❌ Câu 7 sai! Đáp án đúng: **have been standing**. (Giải thích: Nhấn mạnh tính liên tục của hành động kéo dài 'all day').")
+
+        percent = int((score / total) * 100)
+        st.info(f"🏆 Điểm số của bạn: **{score}/{total}** ({percent}%)")
+        if percent == 100:
+            st.balloons()
+
+elif menu_option == "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)":
+    st.header("🎴 Thẻ ghi nhớ Từ vựng C1/C2 (Vocabulary Flashcards)")
+    st.write("Lật thẻ để ghi nhớ Từ vựng, Phiên âm IPA, Định nghĩa tiếng Anh, Nghĩa tiếng Việt và Ví dụ ngữ cảnh.")
+    
+    flashcards_data = [
+        {
+            "word": "Antidisestablishmentarianism",
+            "ipa": "/ˌæn.ti.dɪs.ɪˌstæb.lɪʃ.mənˈteə.ri.ə.nɪ.zəm/",
+            "type": "Noun",
+            "def": "Opposition to the disestablishment of the Church of England",
+            "vietnamese": "Chủ nghĩa chống bãi bỏ giáo hội nhà nước (từ dài nổi tiếng trong Unit 1)",
+            "example": "Could you explain what 'antidisestablishmentarianism' means, please?"
+        },
+        {
+            "word": "Brush up on",
+            "ipa": "/brʌʃ ʌp ɒn/",
+            "type": "Phrasal Verb",
+            "def": "To practice and improve your skills or knowledge of something you learned in the past",
+            "vietnamese": "Ôn tập lại, trau dồi lại kiến thức cũ",
+            "example": "I'm going to have to brush up on my German before I go to Munich."
+        },
+        {
+            "word": "Piece together",
+            "ipa": "/piːs təˈɡeð.ər/",
+            "type": "Phrasal Verb",
+            "def": "To create or understand something by joining its different parts together",
+            "vietnamese": "Xâu chuỗi, xâu kết lại các dữ kiện",
+            "example": "Detectives are still trying to piece together exactly what happened that evening."
+        },
+        {
+            "word": "Mull over",
+            "ipa": "/mʌl ˈəʊ.vər/",
+            "type": "Phrasal Verb",
+            "def": "To think carefully about something for a long time",
+            "vietnamese": "Suy ngẫm, cân nhắc kỹ lưỡng trong thời gian dài",
+            "example": "I'm going to have to mull this proposal over for a while before making a decision."
+        },
+        {
+            "word": "Ring a bell",
+            "ipa": "/rɪŋ ə bel/",
+            "type": "Idiom",
+            "def": "Sounds familiar, but you cannot remember the exact details",
+            "vietnamese": "Nghe quen quen nhưng không nhớ rõ chi tiết",
+            "example": "The name rings a bell, but I can't remember where I've heard it before."
+        }
+    ]
+    
+    card_index = st.slider("🎯 Chọn thẻ từ vựng:", 1, len(flashcards_data), 1) - 1
+    card = flashcards_data[card_index]
+    
+    st.markdown(f"""
+    <div class="card" style="text-align: center; padding: 2rem;">
+        <span class="badge-vocab">{card['type']}</span>
+        <h2 style="color: #1E3A8A; margin-top: 0.5rem;">{card['word']}</h2>
+        <p style="color: #6B7280; font-size: 1.1rem; font-weight: 500;">🔊 {card['ipa']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    with st.expander("🔍 LẬT THẺ ĐỂ XEM NGHĨA & VÍ DỤ"):
+        st.markdown(f"**📖 Định nghĩa Tiếng Anh:** {card['def']}")
+        st.markdown(f"**🇻🇳 Nghĩa Tiếng Việt:** {card['vietnamese']}")
+        st.markdown(f"**💬 Ví dụ ngữ cảnh:** *"" + card['example'] + ""*")
+
+elif menu_option == "⚠️ Góc lưu ý (Watch Out! Corner)":
+    st.header("⚠️ Góc lưu ý C1/C2 (Watch Out! Corner)")
+    st.write("Tổng hợp các bẫy ngữ pháp và từ vựng nâng cao đặc biệt (Watch out!) từ sách Destination C1 & C2.")
     
     st.markdown("""
     <div class="watchout-box">
-        <div class="tip-title">1. Stative Verbs in Continuous Tenses</div>
-        Các động từ như <i>think, feel, have, look, smell, taste</i> có thể dùng ở thì tiếp diễn khi diễn tả <b>hành động/quá trình</b>, nhưng chỉ dùng thì đơn khi diễn tả <b>trạng thái/sở hữu/quan điểm</b>.
-        <br>• <i>I think you're right.</i> (Bản chất: quan điểm = believe)
-        <br>• <i>I'm thinking about buying a car.</i> (Hành động: cân nhắc = considering)
-    </div>
-    
-    <div class="watchout-box">
-        <div class="tip-title">2. Would Rather vs Would Prefer</div>
-        • <b>would rather + bare infinitive</b>: <i>I'd rather stay at home tonight.</i><br>
-        • <b>would rather + somebody + Past Simple</b> (diễn tả mong muốn người khác làm gì ở hiện tại): <i>I'd rather you stayed at home.</i><br>
-        • <b>would prefer + to infinitive</b>: <i>I'd prefer to eat out tonight.</i>
-    </div>
-    
-    <div class="watchout-box">
-        <div class="tip-title">3. Inversion with Negative Adverbials</div>
-        Khi đưa các trạng từ phủ định lên đầu câu (Hardly, Barely, Scarcely, No sooner, Not only), bắt buộc phải đảo ngữ động từ:
-        <br>• <i>Hardly had I sat down <b>when</b> the phone rang.</i>
-        <br>• <i>No sooner had the alarm gone off <b>than</b> the police arrived.</i>
+    <h4>⚠️ Watch Out #1: Present Perfect Simple vs Present Perfect Continuous</h4>
+    <b>Quy tắc quan trọng:</b><br>
+    • Sử dụng <b>Present Perfect Simple</b> khi nhấn mạnh <u>số lượng / số lần hoàn thành</u>:<br>
+    &nbsp;&nbsp;<i>✔ I've written <b>two essays</b> this week.</i><br>
+    • Sử dụng <b>Present Perfect Continuous</b> khi nhấn mạnh <u>thời lượng / tính liên tục</u> của hành động:<br>
+    &nbsp;&nbsp;<i>✔ I've been working here for <b>five years</b>.</i> (nhấn mạnh thời lượng kéo dài)
     </div>
     """, unsafe_allow_html=True)
 
-# 6. PROGRESS TRACKER
-elif menu == "📊 Tiến độ Học tập":
-    st.markdown('<div class="main-header">📊 Báo cáo Tiến độ Tự học</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="watchout-box">
+    <h4>⚠️ Watch Out #2: Stative Verbs in Continuous Tenses</h4>
+    <b>Quy tắc quan trọng:</b><br>
+    Nhiều động từ trạng thái có thể dùng ở thì tiếp diễn khi mô tả <b>HÀNH ĐỘNG</b> thay vì TRẠNG THÁI:<br>
+    • <i>I <b>think</b> it's important to use computers.</i> (State: think = believe)<br>
+    • <i>I'm <b>thinking</b> about going on a computer course.</i> (Action: think = consider/cân nhắc)<br>
+    • <i>This soup <b>tastes</b> delicious.</i> (State: vị ngon)<br>
+    • <i>The chef is <b>tasting</b> the soup.</i> (Action: nếm thử)
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="watchout-box">
+    <h4>⚠️ Watch Out #3: Thói quen phiền phức với 'Always'</h4>
+    Khi kết hợp <b>Present Continuous + always / continually</b> để diễn tả thói quen lập đi lặp lại gây bực mình hoặc phiền phức:<br>
+    • <i>✔ Dan is <b>always coming up</b> with the craziest ideas!</i>
+    </div>
+    """, unsafe_allow_html=True)
+
+elif menu_option == "📊 Báo cáo Tiến độ Học tập":
+    st.header("📊 Báo cáo Tiến độ Học tập")
+    st.write("Đánh dấu các Unit bạn đã hoàn thành để theo dõi tỷ lệ tiến độ toàn khóa học.")
     
-    completed = len(st.session_state.completed_units)
-    total = len(UNITS_DATA)
-    pct = int((completed / total) * 100)
+    units = [f"Unit {i}: " + ("Grammar" if i%2!=0 else "Vocabulary") for i in range(1, 27)]
     
-    st.progress(pct / 100)
-    st.subheader(f"Hoàn thành: {pct}% ({completed}/{total} Units)")
+    completed_units = []
+    st.subheader("✅ Danh sách 26 Units:")
     
-    if completed > 0:
-        st.success("Các Unit bạn đã làm bài luyện tập:")
-        for u in st.session_state.completed_units:
-            st.write(f"- ✅ {u}")
-    else:
-        st.info("Bạn chưa hoàn thành bài luyện tập nào. Hãy sang mục **✍️ Luyện tập Tương tác (Quiz)** để làm bài ngay!")
+    cols = st.columns(3)
+    for idx, u in enumerate(units):
+        col = cols[idx % 3]
+        checked = col.checkbox(u, key=f"unit_chk_{idx}", value=(idx==0))
+        if checked:
+            completed_units.append(u)
+            
+    progress = len(completed_units) / 26
+    st.markdown("---")
+    st.subheader("📈 Tiến độ hoàn thành toàn bộ khóa học:")
+    st.progress(progress)
+    st.info(f"🎉 Bạn đã hoàn thành **{len(completed_units)}/26 Units** ({int(progress*100)}%)")
