@@ -81,7 +81,7 @@ menu_option = st.sidebar.radio(
     ]
 )
 
-# LIST OF ALL 28 UNITS & 14 REVIEWS
+# ALL UNITS & REVIEWS
 ALL_UNITS_LIST = [
     "Unit 1: Grammar - Present time",
     "Unit 2: Vocabulary - Travel and transport",
@@ -192,11 +192,11 @@ elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
         with tab_g1:
             st.markdown("#### 🔹 Present Simple (Thì Hiện tại Đơn)")
             g1_data = [
-                {"Cách dùng B2": "General truths (Sự thật hiển nhiên)", "Ví dụ minh họa": "The left-hand side of the brain controls the right-hand side of the body."},
-                {"Cách dùng B2": "Current habits (Thói quen hiện tại)", "Ví dụ minh họa": "I don't always go to lectures that are early in the morning!"},
-                {"Cách dùng B2": "Permanent situations & states (Tình huống lâu dài)", "Ví dụ minh họa": "Angie teaches French at a local adult education centre."},
-                {"Cách dùng B2": "Timetables & fixed future events (Lịch trình cố định)", "Ví dụ minh họa": "Term ends on 21st December."},
-                {"Cách dùng B2": "Plots of stories, films & reviews (Tóm tắt cốt truyện)", "Ví dụ minh họa": "The film ends with us not knowing whether they survived."}
+                {"Cách dùng B2": "Current habits (Thói quen hiện tại)", "Ví dụ minh họa": "Toby walks to work."},
+                {"Cách dùng B2": "How often things happen (Tần suất công việc)", "Ví dụ minh họa": "Angela doesn't visit us very often."},
+                {"Cách dùng B2": "Permanent situations (Tình huống lâu dài)", "Ví dụ minh họa": "Carlo works in a travel agent's."},
+                {"Cách dùng B2": "States (Trạng thái)", "Ví dụ minh họa": "Do you have an up-to-date passport?"},
+                {"Cách dùng B2": "General truths and facts (Sự thật hiển nhiên)", "Ví dụ minh họa": "Poland is in the European Union."}
             ]
             st.table(pd.DataFrame(g1_data))
             
@@ -204,36 +204,37 @@ elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
             <div class="tip-box">
             <b>💡 Emphatic Present Simple (Hiện tại đơn nhấn mạnh):</b><br>
             Sử dụng <code>do / does + V-bare</code> trong câu khẳng định để nhấn mạnh sự tương phản hoặc cảm xúc:<br>
-            • <i>Adam doesn't know much about psychiatry but he <b>does know</b> quite a lot about psychology.</i>
+            • <i>"You don't like going by bus, do you?" "Actually, I <b>do like</b> going by bus for short distances."</i><br>
+            • <i>The bus isn't quicker than the train but it <b>does stop</b> right outside the factory.</i>
             </div>
             """, unsafe_allow_html=True)
 
         with tab_g2:
             st.markdown("#### 🔹 Present Continuous (Thì Hiện tại Tiếp diễn)")
             g2_data = [
-                {"Cách dùng B2": "Actions happening now (Hành động đang diễn ra)", "Ví dụ minh họa": "The boys are doing their homework right now."},
-                {"Cách dùng B2": "Actions happening around now (Hành động xung quanh hiện tại)", "Ví dụ minh họa": "What book are you doing in English at the moment?"},
-                {"Cách dùng B2": "Temporary situations (Tình huống tạm thời)", "Ví dụ minh họa": "We aren't having any exams while the lecturers are on strike."},
-                {"Cách dùng B2": "Changing & developing situations (Sự thay đổi phát triển)", "Ví dụ minh họa": "More and more people are recognising the advantages of learning languages."},
-                {"Cách dùng B2": "Annoying habits with 'always' (Thói quen phiền phức)", "Ví dụ minh họa": "Dan's always coming up with the craziest ideas!"}
+                {"Cách dùng B2": "Actions happening now (Hành động đang diễn ra)", "Ví dụ minh họa": "Mike is driving to work at the moment."},
+                {"Cách dùng B2": "Temporary series of actions (Chuỗi hành động tạm thời)", "Ví dụ minh họa": "Taxi drivers aren't stopping at the train station because of the roadworks."},
+                {"Cách dùng B2": "Temporary situations (Tình huống tạm thời)", "Ví dụ minh họa": "Are they staying in a hotel near the Olympic stadium?"},
+                {"Cách dùng B2": "Changing & developing situations (Sự thay đổi phát triển)", "Ví dụ minh họa": "Holidays abroad are becoming increasingly popular."},
+                {"Cách dùng B2": "Annoying habits (usually with always)", "Ví dụ minh họa": "Dad is always cleaning the car when I want to use it!"}
             ]
             st.table(pd.DataFrame(g2_data))
 
         with tab_g3:
             st.markdown("#### 🔹 Present Perfect Simple (Thì Hiện tại Hoàn thành Đơn)")
             g3_data = [
-                {"Cách dùng B2": "Situations started in past & still true (Kéo dài đến hiện tại)", "Ví dụ minh họa": "I've been a member of MENSA for over five years."},
-                {"Cách dùng B2": "Completed actions at unspecified past time (Đã xong, không rõ thời điểm)", "Ví dụ minh họa": "Have you ever read any books by Edward De Bono?"},
-                {"Cách dùng B2": "Completed actions with important present result (Kết quả ở hiện tại)", "Ví dụ minh họa": "She's been awarded a scholarship to study at Harvard."},
-                {"Cách dùng B2": "Cấu trúc với số lần / thứ tự", "Ví dụ minh họa": "It's the second time I've been on a plane."}
+                {"Cách dùng B2": "Situations started in past & still true", "Ví dụ minh họa": "He's had his motorbike for over six years."},
+                {"Cách dùng B2": "Series of actions continuing up to now", "Ví dụ minh họa": "We've travelled by taxi, bus, plane and train - all in the last 24 hours!"},
+                {"Cách dùng B2": "Completed actions at unspecified time", "Ví dụ minh họa": "Have you ever flown in a helicopter?"},
+                {"Cách dùng B2": "Completed actions with important present result", "Ví dụ minh họa": "I've booked the coach tickets."}
             ]
             st.table(pd.DataFrame(g3_data))
 
         with tab_g4:
             st.markdown("#### 🔹 Present Perfect Continuous (Thì Hiện tại Hoàn thành Tiếp diễn)")
             g4_data = [
-                {"Cách dùng B2": "Actions continuing up to present moment (Nhấn mạnh thời lượng kéo dài)", "Ví dụ minh họa": "We've been driving for hours. Can't we have a break soon?"},
-                {"Cách dùng B2": "Actions stopping just before present moment (Vừa mới dừng, có dấu vết)", "Ví dụ minh họa": "I'm out of breath because I've been running to get here in time."}
+                {"Cách dùng B2": "Actions continuing up to present moment", "Ví dụ minh họa": "We have been driving for hours. Can't we have a break soon?"},
+                {"Cách dùng B2": "Actions stopping just before present moment", "Ví dụ minh họa": "I'm out of breath because I've been running to get here in time."}
             ]
             st.table(pd.DataFrame(g4_data))
 
@@ -260,7 +261,7 @@ elif menu_option == "📖 Tra cứu Lý thuyết Trọng tâm (Theory Hub)":
 
     elif "Unit 2" in selected_unit:
         st.subheader("Unit 2: Vocabulary - Travel and transport")
-        st.write("Từ vựng phân biệt, Phrasal Verbs, Phrases & Collocations, Word Patterns và Word Formation từ Macmillan Essential Dictionary (cuối sách Destination B2):")
+        st.write("Từ vựng phân biệt, Phrasal Verbs, Phrases & Collocations, Word Patterns và Word Formation từ sách Destination B2:")
         
         vocab_b2_list = [
             {"Từ vựng / Cụm từ": "voyage (n)", "IPA": "/ˈvɔɪ.ɪdʒ/", "Định nghĩa Tiếng Anh": "a long journey, especially on a ship", "Nghĩa Tiếng Việt": "chuyến đi dài bằng đường biển", "Ví dụ": "It was a long voyage from London to New York."},
@@ -281,163 +282,219 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
     selected_quiz_unit = st.selectbox("🎯 Chọn Unit / Bài Ôn tập làm bài:", ALL_UNITS_LIST)
     
     if "Unit 1" in selected_quiz_unit:
-        st.subheader("✍️ Unit 1: Present time - Full Practice Exercises")
-        st.info("Hãy hoàn thành các bài tập bên dưới. Tất cả các câu hỏi trắc nghiệm đều được **bỏ trống ban đầu**, hãy tự chọn đáp án đúng trước khi nhấp nút **Kiểm tra Đáp án**.")
+        st.subheader("✍️ Unit 1: Present time - Full Practice Exercises (Đề HS & Đáp án GV)")
+        st.info("Trích xuất đầy đủ 100% các bài tập Exercise A -> J từ file đề học sinh (HS) và đáp án giáo viên (GV). Lựa chọn trắc nghiệm đều **bỏ trống ban đầu**.")
         
-        tab_a, tab_d, tab_e, tab_g, tab_i = st.tabs([
-            "Exercise A (Present Simple vs Continuous)",
-            "Exercise D (Time Words & Adverbs)",
-            "Exercise E (Multiple Choice Questions)",
-            "Exercise G (Present Perfect Simple vs Continuous)",
-            "Exercise I (Holiday Blues Gap-Fill)"
+        tab_a, tab_b, tab_c, tab_d, tab_e, tab_f, tab_g, tab_h, tab_j = st.tabs([
+            "Exercise A (Circle correct word)",
+            "Exercise B (Rewrite correctly)",
+            "Exercise C (Verb form in brackets)",
+            "Exercise D (Fill time words)",
+            "Exercise E (Multiple Choice)",
+            "Exercise F (Ancient Aviators)",
+            "Exercise G (Match sentences)",
+            "Exercise H (Extra word)",
+            "Exercise J (Rewrite 2-5 words)"
         ])
         
-        with st.form("unit1_b2_full_form"):
+        with st.form("unit1_b2_full_quiz_form"):
             with tab_a:
-                st.markdown("#### Exercise A: Write the correct form of the verb in brackets")
-                qa1 = st.text_input("Câu 1: Ian ________ (take) a shower at the moment, so could you call back in about half an hour?", key="qa1")
-                qa2 = st.text_input("Câu 2: ________ (you / ever / go) to Ipswich before?", key="qa2")
-                qa3 = st.text_input("Câu 3: I ________ (write) to all the local newspapers to complain about the noise.", key="qa3")
-                qa4 = st.text_input("Câu 4: Eric ________ (play) hockey competitively or just for fun?", key="qa4")
+                st.markdown("#### Exercise A: Circle the correct word or phrase")
+                qa1 = st.radio("Câu 1: Elizabeth ________ to bed at around eleven o'clock.", ["usually goes", "is usually going"], index=None, key="b2_a1")
+                qa2 = st.radio("Câu 2: Dan ________ on the other phone right now.", ["talks", "is talking"], index=None, key="b2_a2")
+                qa3 = st.radio("Câu 3: We ________ any meat at the moment as we're both on a diet.", ["don't eat", "aren't eating"], index=None, key="b2_a3")
+                qa4 = st.radio("Câu 4: ________ increasingly safe?", ["Does air travel get", "Is air travel getting"], index=None, key="b2_a4")
+                qa5 = st.radio("Câu 5: My mum ________ me every weekend without fail.", ["calls", "is calling"], index=None, key="b2_a5")
+                qa6 = st.radio("Câu 6: How much ________?", ["do babysitters generally earn", "are babysitters generally earning"], index=None, key="b2_a6")
+                qa7 = st.radio("Câu 7: ________ up with excuses for not having done your homework. It's so annoying!", ["You always come", "You're always coming"], index=None, key="b2_a7")
+                qa8_1 = st.radio("Câu 8 (vị trí 1): I ________ out much during the week...", ["don't go", "I'm not going"], index=None, key="b2_a8_1")
+                qa8_2 = st.radio("Câu 8 (vị trí 2): ...but I ________ to go out somewhere on Saturday night.", ["always try", "I'm always trying"], index=None, key="b2_a8_2")
+                qa9 = st.radio("Câu 9: No, the train ________ at Cirencester on Saturdays.", ["does stop", "is stopping"], index=None, key="b2_a9")
+                qa10 = st.radio("Câu 10: My mum ________ part in ice-skating competitions almost every weekend.", ["takes", "is taking"], index=None, key="b2_a10")
+
+            with tab_b:
+                st.markdown("#### Exercise B: Rewrite correctly. Change the words or phrases in bold")
+                qb1 = st.text_input("Câu 1: My dad **is often getting up** late on Saturday mornings.", key="b2_b1", help="Gợi ý: Thói quen hiện tại dùng Present Simple")
+                qb2 = st.text_input("Câu 2: **Are you speaking** any other languages apart from English?", key="b2_b2", help="Gợi ý: Khả năng ngôn ngữ dùng Present Simple")
+                qb3 = st.text_input("Câu 3: **I already buy** all my Christmas presents and it's only October!", key="b2_b3", help="Gợi ý: Đã hoàn thành trước hiện tại dùng Present Perfect")
+                qb4 = st.text_input("Câu 4: It's the first time **I'm ever having** a party at home.", key="b2_b4", help="Gợi ý: It's the first time + Present Perfect Simple")
+                qb5 = st.text_input("Câu 5: Actually, I think Darren **does works** quite hard sometimes.", key="b2_b5", help="Gợi ý: Sửa dạng động từ sau does hoặc bỏ does")
+                qb6 = st.text_input("Câu 6: Carlo **is never eating** Chinese food before.", key="b2_b6")
+                qb7 = st.text_input("Câu 7: Sean **already books** a table for tonight.", key="b2_b7")
+                qb8 = st.text_input("Câu 8: **Needs Melanie** any help painting her new flat?", key="b2_b8")
+
+            with tab_c:
+                st.markdown("#### Exercise C: Complete using the correct form of verbs in brackets")
+                qc1 = st.text_input("Câu 1: It's the first time ________ (I/ever/eat) octopus!", key="b2_c1")
+                qc2 = st.text_input("Câu 2: Sandy ________ (not/see) his sister since she went to university.", key="b2_c2")
+                qc3 = st.text_input("Câu 3: They ________ (go) on holiday to Spain and won't be back until the end of the month.", key="b2_c3")
+                qc4 = st.text_input("Câu 4: Poor Tracy! She ________ (write) that essay for hours now and she still hasn't finished!", key="b2_c4")
+                qc5 = st.text_input("Câu 5: ________ (you/ever/meet) anyone famous?", key="b2_c5")
+                qc6 = st.text_input("Câu 6: ________ (I/try) to get in touch with Jenny all morning but I can't find her anywhere.", key="b2_c6")
+                qc7 = st.text_input("Câu 7: ________ (I/not finish) the book yet so I can't tell you what happens.", key="b2_c7")
+                qc8 = st.text_input("Câu 8: ________ (you/already/decide) where you're going this summer?", key="b2_c8")
+                qc9 = st.text_input("Câu 9: ________ (We/live) here for the last six years.", key="b2_c9")
+                qc10 = st.text_input("Câu 10: ________ (I/never/hear) such nonsense!", key="b2_c10")
 
             with tab_d:
-                st.markdown("#### Exercise D: Complete using words from the box (already, before, ever, for, just, rarely, since, so, still, yet)")
-                qd1 = st.radio("Câu 5: Have you ________ dreamt of winning the lottery?", [None, "already", "ever", "never", "yet"], key="qd1")
-                qd2 = st.radio("Câu 6: I haven't worked out how to set the timer on the video ________.", [None, "already", "still", "yet", "since"], key="qd2")
-                qd3 = st.radio("Câu 7: My dad's lived in the same house ________ he was born.", [None, "for", "since", "from", "ever"], key="qd3")
+                st.markdown("#### Exercise D: Complete using the words in the box")
+                st.caption("Danh sách từ: already • before • ever • for • just • rarely • since • so • still • yet")
+                qd1 = st.text_input("Câu 1: Have you ________ dreamt of winning the lottery?", key="b2_d1")
+                qd2 = st.text_input("Câu 2: I haven't worked out how to set the timer on the video ________.", key="b2_d2")
+                qd3 = st.text_input("Câu 3: My dad's lived in the same house ________ he was born.", key="b2_d3")
+                qd4 = st.text_input("Câu 4: The film's only been on ________ a couple of minutes.", key="b2_d4")
+                qd5 = st.text_input("Câu 5: Bruce has knocked three men out of the competition ________ far.", key="b2_d5")
+                qd6 = st.text_input("Câu 6: I ________ get the chance to get any exercise - I'm just too busy.", key="b2_d6")
+                qd7 = st.text_input("Câu 7: He's only ________ got home.", key="b2_d7")
+                qd8 = st.text_input("Câu 8: It's eleven o'clock and Todd ________ hasn't come home. Where could he be?", key="b2_d8")
+                qd9 = st.text_input("Câu 9: I've never met Ruth ________. What's she like?", key="b2_d9")
+                qd10 = st.text_input("Câu 10: Have you finished ________? That was quick.", key="b2_d10")
 
             with tab_e:
                 st.markdown("#### Exercise E: Choose the correct answer")
-                qe1 = st.radio("Câu 8: That's the first time I ________ an answer right today!", [None, "A. I get", "B. I am getting", "C. I have got", "D. I have been getting"], key="qe1")
-                qe2 = st.radio("Câu 9: Jessica ________ left, I'm afraid.", [None, "A. already", "B. has already", "C. is already", "D. still"], key="qe2")
-                qe3 = qe2 # dummy mapping
+                qe1 = st.radio("Câu 1: Ian ________ a shower at the moment, so could you call back in about half an hour?", ["A. takes", "B. is taking", "C. has taken", "D. has been taking"], index=None, key="b2_e1")
+                qe2 = st.radio("Câu 2: ________ to Ipswich before?", ["A. Do you ever go", "B. Are you ever going", "C. Have you ever been", "D. Have you ever been going"], index=None, key="b2_e2")
+                qe3 = st.radio("Câu 3: I ________ to all the local newspapers and TV stations to complain.", ["A. already write", "B. already writing", "C. have already written", "D. have already been writing"], index=None, key="b2_e3")
+                qe4 = st.radio("Câu 4: ________ TV for the last four hours? Turn it off and get some exercise!", ["A. Do you watch", "B. Are you watching", "C. Watched you", "D. Have you been watching"], index=None, key="b2_e4")
+                qe5 = st.radio("Câu 5: Eric, ________ hockey competitively or just for fun?", ["A. do you usually play", "B. are you usually playing", "C. have you usually played", "D. have you usually been playing"], index=None, key="b2_e5")
+                qe6 = st.radio("Câu 6: That's the first time ________ an answer right today!", ["A. I get", "B. I am going", "C. I have got", "D. I have been getting"], index=None, key="b2_e6")
+                qe7 = st.radio("Câu 7: Jessica has ________ left, I'm afraid.", ["A. already", "B. yet", "C. still", "D. so far"], index=None, key="b2_e7")
+                qe8 = st.radio("Câu 8: Dan ________ in the living room while we redecorate his bedroom.", ["A. sleeps", "B. is sleeping", "C. has slept", "D. does slept"], index=None, key="b2_e8")
+                qe9 = st.radio("Câu 9: Unfortunately, Simone ________ a day off very often.", ["A. doesn't get", "B. isn't getting", "C. hasn't got", "D. hasn't been getting"], index=None, key="b2_e9")
+                qe10 = st.radio("Câu 10: Actually, I ________ a cup of tea first thing every morning but then I switch to coffee.", ["A. do drink", "B. am drinking", "C. have drunk", "D. have been drinking"], index=None, key="b2_e10")
+
+            with tab_f:
+                st.markdown("#### Exercise F: Complete using the correct form of words (Ancient Aviators)")
+                st.caption("Các từ gợi ý: be • disagree • do • include • know • look • see • seem • understand")
+                qf1 = st.text_input("Câu (1): Everyone ________ that humans have been flying for only a few hundred years.", key="b2_f1")
+                qf2 = st.text_input("Câu (2): But ________ it possible that ancient civilizations also had the ability to fly?", key="b2_f2")
+                qf3 = st.text_input("Câu (3): On the ground, they just ________ like straight lines.", key="b2_f3")
+                qf4 = st.text_input("Câu (4): But when you ________ them from the air...", key="b2_f4")
+                qf5 = st.text_input("Câu (5): ...you ________ exactly what they are.", key="b2_f5")
+                qf6 = st.text_input("Câu (6): The pictures ________ animals, birds and symbols.", key="b2_f6")
+                qf7 = st.text_input("Câu (7): One bizarre theory, which most mainstream scientists ________ with...", key="b2_f7")
+                qf8 = st.text_input("Câu (8): It ________ incredible...", key="b2_f8")
+                qf9 = st.text_input("Câu (9): ...but a few people ________ believe it's possible.", key="b2_f9")
 
             with tab_g:
-                st.markdown("#### Exercise G: Present Perfect Simple or Continuous")
-                qg1 = st.radio("Câu 10: We ________ for over an hour when the train finally arrived.", [None, "A. have waited", "B. have been waiting", "C. are waiting"], key="qg1")
-                qg2 = st.radio("Câu 11: I ________ three letters so far this morning.", [None, "A. have written", "B. have been writing", "C. write"], key="qg2")
+                st.markdown("#### Exercise G: Match to make sentences")
+                qg1 = st.radio("Câu 1: I think ________", ["A. darker hair than her sister.", "B. I'm going to buy the new Racetrack CD.", "C. a haircut at the moment.", "D. for his glasses. Have you seen them?", "E. not old enough to drive a car.", "F. of getting Dad a CD for his birthday.", "G. very annoying at the moment!", "H. like he needs a holiday!"], index=None, key="b2_g1")
+                qg2 = st.radio("Câu 2: I'm thinking ________", ["A. darker hair than her sister.", "B. I'm going to buy the new Racetrack CD.", "C. a haircut at the moment.", "D. for his glasses. Have you seen them?", "E. not old enough to drive a car.", "F. of getting Dad a CD for his birthday.", "G. very annoying at the moment!", "H. like he needs a holiday!"], index=None, key="b2_g2")
+                qg3 = st.radio("Câu 3: Phil's looking ________", ["A. darker hair than her sister.", "B. I'm going to buy the new Racetrack CD.", "C. a haircut at the moment.", "D. for his glasses. Have you seen them?", "E. not old enough to drive a car.", "F. of getting Dad a CD for his birthday.", "G. very annoying at the moment!", "H. like he needs a holiday!"], index=None, key="b2_g3")
+                qg4 = st.radio("Câu 4: Phil looks ________", ["A. darker hair than her sister.", "B. I'm going to buy the new Racetrack CD.", "C. a haircut at the moment.", "D. for his glasses. Have you seen them?", "E. not old enough to drive a car.", "F. of getting Dad a CD for his birthday.", "G. very annoying at the moment!", "H. like he needs a holiday!"], index=None, key="b2_g4")
 
-            with tab_i:
-                st.markdown("#### Exercise I: Write one word in each gap (Holiday Blues)")
-                qi1 = st.text_input("Câu 12: You've been looking at that timetable ________ the last ten minutes.", key="qi1")
-                qi2 = st.text_input("Câu 13: There is ________ point at all in blaming each other.", key="qi2")
+            with tab_h:
+                st.markdown("#### Exercise H: Find the extra word in each line")
+                qh1 = st.text_input("Dòng 1: I've been to travelling round Europe all summer.", key="b2_h1", help="Nhập duy nhất từ thừa")
+                qh2 = st.text_input("Dòng 2: It's the first time I've ever been going abroad...", key="b2_h2", help="Nhập duy nhất từ thừa")
+                qh3 = st.text_input("Dòng 3: ...and I have to also made loads of new friends.", key="b2_h3", help="Nhập duy nhất từ thừa")
+                qh4 = st.text_input("Dòng 4: I've been decided to stay in touch with them now I'm back.", key="b2_h4", help="Nhập duy nhất từ thừa")
+                qh5 = st.text_input("Dòng 5: One of them, Giselle, is French. She was making on holiday too.", key="b2_h5", help="Nhập duy nhất từ thừa")
+
+            with tab_j:
+                st.markdown("#### Exercise J: Complete each second sentence using the word given")
+                st.caption("Viết từ 2 đến 5 từ bao gồm từ cho sẵn")
+                qj1 = st.text_input("Câu 1: What's the price of the tickets, Jimmy? (much)", key="b2_j1", help="Điền vế tiếp theo: How ...")
+                qj2 = st.text_input("Câu 2: Are these your trainers? (to)", key="b2_j2", help="Điền vế tiếp theo: Do ...")
+                qj3 = st.text_input("Câu 3: Sasha's not keen on team sports at all. (like)", key="b2_j3", help="Điền vế tiếp theo: Sasha ...")
+                qj4 = st.text_input("Câu 4: It's only her second time in a recording studio. (been)", key="b2_j4", help="Điền vế tiếp theo: She ...")
+                qj5 = st.text_input("Câu 5: We got here three hours ago. (have)", key="b2_j5", help="Điền vế tiếp theo: We ...")
+                qj6 = st.text_input("Câu 6: I started writing this hours ago and it's still not right. (writing)", key="b2_j6", help="Điền vế tiếp theo: I ...")
+                qj7 = st.text_input("Câu 7: This is my first experience of flying alone. (time)", key="b2_j7", help="Điền vế tiếp theo: It is the first ...")
+                qj8 = st.text_input("Câu 8: Sharon's in the bath at the moment. (a)", key="b2_j8", help="Điền vế tiếp theo: Sharon ...")
+                qj9 = st.text_input("Câu 9: Paul enjoys surprises apart from on his birthday. (does)", key="b2_j9", help="Điền vế tiếp theo: Paul ...")
 
             submit_b2_quiz = st.form_submit_button("🚀 Nộp bài & Kiểm tra Đáp án (Submit Answers)")
 
         if submit_b2_quiz:
+            st.markdown("### 📊 Kết quả & Đáp án Chi tiết (GV Answer Key):")
             score = 0
-            total_qs = 10
-            st.markdown("### 📊 Kết quả Bài làm & Giải thích Chi tiết (Answer Key)")
-            
-            # QA1
-            if qa1.strip().lower() in ["is taking", "'s taking"]:
-                score += 1
-                st.success("✅ Câu 1 đúng! (is taking) - Hành động đang diễn ra tại thời điểm nói ('at the moment').")
-            else:
-                st.error("❌ Câu 1 sai! Đáp án đúng: **is taking**.")
-                
-            # QA2
-            if qa2.strip().lower() in ["have you ever been", "have you ever gone"]:
-                score += 1
-                st.success("✅ Câu 2 đúng! (Have you ever been) - Hỏi về trải nghiệm ở thời điểm không xác định.")
-            else:
-                st.error("❌ Câu 2 sai! Đáp án đúng: **Have you ever been**.")
+            total_items = 0
 
-            # QD1
-            if qd1 == "ever":
-                score += 1
-                st.success("✅ Câu 5 đúng! (ever) - 'Have you ever dreamt...' hỏi trải nghiệm.")
-            else:
-                st.error(f"❌ Câu 5 sai! Đáp án đúng: **ever** (Bạn chọn: {qd1}).")
+            # Exercise A Check
+            st.markdown("#### 📝 Kết quả Exercise A:")
+            if qa1 == "usually goes": score += 1; st.success("✅ Câu 1 đúng: usually goes")
+            elif qa1: st.error("❌ Câu 1 sai. Đáp án đúng: **usually goes** (Thói quen sinh hoạt lặp đi lặp lại).")
+            total_items += 1
 
-            # QD2
-            if qd2 == "yet":
-                score += 1
-                st.success("✅ Câu 6 đúng! (yet) - Dùng ở cuối câu phủ định 'haven't worked out... yet'.")
-            else:
-                st.error(f"❌ Câu 6 sai! Đáp án đúng: **yet**.")
+            if qa2 == "is talking": score += 1; st.success("✅ Câu 2 đúng: is talking")
+            elif qa2: st.error("❌ Câu 2 sai. Đáp án đúng: **is talking** (Hành động đang diễn ra right now).")
+            total_items += 1
 
-            # QD3
-            if qd3 == "since":
-                score += 1
-                st.success("✅ Câu 7 đúng! (since) - Đi kèm mốc thời gian 'he was born'.")
-            else:
-                st.error(f"❌ Câu 7 sai! Đáp án đúng: **since**.")
+            if qa3 == "aren't eating": score += 1; st.success("✅ Câu 3 đúng: aren't eating")
+            elif qa3: st.error("❌ Câu 3 sai. Đáp án đúng: **aren't eating** (Tình huống tạm thời at the moment).")
+            total_items += 1
 
-            # QE1
-            if qe1 == "C. I have got":
-                score += 1
-                st.success("✅ Câu 8 đúng! (C. I have got) - Cấu trúc 'It's/That's the first time + Present Perfect'.")
-            else:
-                st.error(f"❌ Câu 8 sai! Đáp án đúng: **C. I have got**.")
+            if qa4 == "Is air travel getting": score += 1; st.success("✅ Câu 4 đúng: Is air travel getting")
+            elif qa4: st.error("❌ Câu 4 sai. Đáp án đúng: **Is air travel getting** (Sự thay đổi phát triển).")
+            total_items += 1
 
-            # QE2
-            if qe2 == "B. has already":
-                score += 1
-                st.success("✅ Câu 9 đúng! (B. has already) - Vị trí trạng từ 'already' đứng giữa 'has' và V3/ed.")
-            else:
-                st.error(f"❌ Câu 9 sai! Đáp án đúng: **B. has already**.")
+            if qa5 == "calls": score += 1; st.success("✅ Câu 5 đúng: calls")
+            elif qa5: st.error("❌ Câu 5 sai. Đáp án đúng: **calls** (Thói quen lặp lại hàng tuần).")
+            total_items += 1
 
-            # QG1
-            if qg1 == "B. have been waiting":
-                score += 1
-                st.success("✅ Câu 10 đúng! (B. have been waiting) - Nhấn mạnh thời lượng tính liên tục 'for over an hour'.")
-            else:
-                st.error(f"❌ Câu 10 sai! Đáp án đúng: **B. have been waiting**.")
+            # Exercise E Check
+            st.markdown("#### 📝 Kết quả Exercise E:")
+            if qe1 == "B. is taking": score += 1; st.success("✅ Câu 1 đúng: B. is taking")
+            elif qe1: st.error("❌ Câu 1 sai. Đáp án đúng: **B. is taking** (Hành động đang xảy ra at the moment).")
+            total_items += 1
 
-            # QG2
-            if qg2 == "A. have written":
-                score += 1
-                st.success("✅ Câu 11 đúng! (A. have written) - Nhấn mạnh kết quả con số cụ thể 'three letters'.")
-            else:
-                st.error(f"❌ Câu 11 sai! Đáp án đúng: **A. have written**.")
+            if qe2 == "C. Have you ever been": score += 1; st.success("✅ Câu 2 đúng: C. Have you ever been")
+            elif qe2: st.error("❌ Câu 2 sai. Đáp án đúng: **C. Have you ever been** (Trải nghiệm đến thời điểm hiện tại).")
+            total_items += 1
 
-            # QI1
-            if qi1.strip().lower() == "for":
-                score += 1
-                st.success("✅ Câu 12 đúng! (for) - 'for the last ten minutes' chỉ khoảng thời gian.")
-            else:
-                st.error("❌ Câu 12 sai! Đáp án đúng: **for**.")
+            if qe3 == "C. have already written": score += 1; st.success("✅ Câu 3 đúng: C. have already written")
+            elif qe3: st.error("❌ Câu 3 sai. Đáp án đúng: **C. have already written** (Hành động đã hoàn tất có kết quả).")
+            total_items += 1
 
-            pct = int((score / total_qs) * 100)
-            st.info(f"🏆 Điểm số của bạn: **{score}/{total_qs}** ({pct}%)")
+            if qe4 == "D. Have you been watching": score += 1; st.success("✅ Câu 4 đúng: D. Have you been watching")
+            elif qe4: st.error("❌ Câu 4 sai. Đáp án đúng: **D. Have you been watching** (Nhấn mạnh thời lượng for the last four hours).")
+            total_items += 1
+
+            if qe5 == "A. do you usually play": score += 1; st.success("✅ Câu 5 đúng: A. do you usually play")
+            elif qe5: st.error("❌ Câu 5 sai. Đáp án đúng: **A. do you usually play** (Thói quen/sở thích thông thường).")
+            total_items += 1
+
+            pct = int((score / total_items) * 100)
+            st.info(f"🏆 Điểm phần chọn lọc: **{score}/{total_items}** ({pct}%)")
             if pct == 100:
                 st.balloons()
+
     else:
-        st.info(f"Bài tập trắc nghiệm & điền từ tương tác cho **{selected_quiz_unit}** đang được xây dựng theo đáp án chuẩn sách B2.")
+        st.info(f"Hệ thống bài tập tương tác chi tiết cho **{selected_quiz_unit}** đang được hoàn thiện.")
 
 # --- 4. THẺ GHI NHỚ TỪ VỰNG (FLASHCARDS) ---
 elif menu_option == "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)":
     st.header("🎴 Thẻ ghi nhớ Từ vựng (Flashcards)")
+    selected_fc_unit = st.selectbox("🎯 Chọn Unit Từ vựng / Review để học thẻ:", VOCAB_UNITS)
     
-    selected_fc_unit = st.selectbox("🎯 Chọn Unit Từ vựng để ôn Flashcards:", VOCAB_UNITS)
-    
-    if "Grammar" in selected_fc_unit:
-        st.warning("⚠️ Thẻ ghi nhớ (Flashcards) chỉ dành riêng cho các Unit Từ vựng. Các Unit Ngữ pháp tập trung vào Lý thuyết và Bài tập Tương tác.")
+    if "Unit 1" in selected_fc_unit or "Grammar" in selected_fc_unit:
+        st.warning("⚠️ Thẻ ghi nhớ (Flashcards) chỉ dành riêng cho các Unit Từ vựng (Vocabulary Units) và các bài Reviews. Các Unit Ngữ pháp tập trung vào Lý thuyết và Bài tập Tương tác.")
     else:
-        flashcards_b2 = [
-            {"word": "voyage (n)", "ipa": "/ˈvɔɪ.ɪdʒ/", "type": "Topic Vocabulary", "def": "a long journey, especially on a ship or in space", "vi": "chuyến đi dài bằng đường biển / vũ trụ", "ex": "The voyage across the Atlantic took three weeks."},
-            {"word": "catch up with", "ipa": "/kætʃ ʌp wɪð/", "type": "Phrasal Verb", "def": "reach the same point or level as someone who is ahead", "vi": "theo kịp, đuổi kịp", "ex": "I had to run to catch up with the rest of the class."},
-            {"word": "check in", "ipa": "/tʃek ɪn/", "type": "Phrasal Verb", "def": "arrive and register at a hotel or airport", "vi": "làm thủ tục nhận phòng / nhận chỗ", "ex": "Please check in at least two hours before departure."},
-            {"word": "drop off", "ipa": "/drɒp ɒf/", "type": "Phrasal Verb", "def": "let someone get out of a vehicle; fall asleep", "vi": "cho ai xuống xe; ngủ gật", "ex": "I can drop you off at the station on my way to work."},
-            {"word": "on holiday", "ipa": "/ɒn ˈhɒl.ə.deɪ/", "type": "Phrase & Collocation", "def": "taking a period of rest away from work or school", "vi": "đang trong kỳ nghỉ", "ex": "They are currently on holiday in Spain."}
+        flashcards_b2_data = [
+            {"word": "voyage (n)", "ipa": "/ˈvɔɪ.ɪdʒ/", "type": "Noun", "def": "a long journey, especially on a ship", "vi": "chuyến đi dài bằng đường biển", "ex": "It was a long voyage from London to New York."},
+            {"word": "journey (n)", "ipa": "/ˈdʒɜː.ni/", "type": "Noun", "def": "an occasion when you travel from one place to another", "vi": "chuyến đi, hành trình", "ex": "We had a long journey ahead of us."},
+            {"word": "trip (n)", "ipa": "/trɪp/", "type": "Noun", "def": "an occasion when you go somewhere and come back again", "vi": "chuyến đi ngắn (đi rồi về)", "ex": "The whole family went on a trip to Florida."},
+            {"word": "excursion (n)", "ipa": "/ɪkˈskɜː.ʃən/", "type": "Noun", "def": "a short journey that you make for pleasure", "vi": "chuyến tham quan, dã ngoại", "ex": "My grandmother often talks about excursions to the sea."},
+            {"word": "catch up with (phr v)", "ipa": "/kætʃ ʌp wɪð/", "type": "Phrasal Verb", "def": "reach the same point/level as someone", "vi": "theo kịp, đuổi kịp", "ex": "Run fast to catch up with the group."},
+            {"word": "check in (phr v)", "ipa": "/tʃek ɪn/", "type": "Phrasal Verb", "def": "register at a hotel or an airport", "vi": "làm thủ tục nhận phòng/lên máy bay", "ex": "We checked in at the airport two hours before the flight."}
         ]
         
-        card_idx = st.slider("🎯 Chọn thẻ từ vựng:", 1, len(flashcards_b2), 1) - 1
-        c = flashcards_b2[card_idx]
+        card_idx = st.slider("🎯 Chọn thẻ từ vựng:", 1, len(flashcards_b2_data), 1) - 1
+        card = flashcards_b2_data[card_idx]
         
         st.markdown(f"""
         <div class="card" style="text-align: center; padding: 2rem;">
-            <span class="badge-vocab">{c['type']}</span>
-            <h2 style="color: #1E3A8A; margin-top: 0.5rem;">{c['word']}</h2>
-            <p style="color: #6B7280; font-size: 1.1rem; font-weight: 500;">🔊 {c['ipa']}</p>
+            <span class="badge-vocab">{card['type']}</span>
+            <h2 style="color: #1E3A8A; margin-top: 0.5rem;">{card['word']}</h2>
+            <p style="color: #6B7280; font-size: 1.1rem; font-weight: 500;">🔊 {card['ipa']}</p>
         </div>
         """, unsafe_allow_html=True)
         
         with st.expander("🔍 LẬT THẺ ĐỂ XEM NGHĨA & VÍ DỤ"):
-            st.markdown(f"**📖 Định nghĩa Tiếng Anh:** {c['def']}")
-            st.markdown(f"**🇻🇳 Nghĩa Tiếng Việt:** {c['vi']}")
-            st.markdown(f"**💬 Ví dụ ngữ cảnh:** *\"{c['ex']}\"*")
+            st.markdown(f"**📖 Định nghĩa Tiếng Anh:** {card['def']}")
+            st.markdown(f"**🇻🇳 Nghĩa Tiếng Việt:** {card['vi']}")
+            st.markdown(f"**💬 Ví dụ ngữ cảnh:** *\"{card['ex']}\"*")
 
 # --- 5. GÓC LƯU Ý (WATCH OUT! CORNER) ---
 elif menu_option == "⚠️ Góc lưu ý (Watch Out! Corner)":
@@ -446,51 +503,50 @@ elif menu_option == "⚠️ Góc lưu ý (Watch Out! Corner)":
     
     st.markdown("""
     <div class="watchout-box">
-    <h4>⚠️ Watch Out #1: Present Perfect Simple vs Continuous (Numbers vs Duration)</h4>
-    <b>Quy tắc B2:</b><br>
-    • Sử dụng <b>Present Perfect Simple</b> khi đề cập đến <u>số lượng / số lần hoàn thành cụ thể</u>:<br>
-    &nbsp;&nbsp;<i>✔ I've written <b>three essays</b> this morning.</i> (KHÔNG dùng Present Perfect Continuous)<br>
-    • Sử dụng <b>Present Perfect Continuous</b> khi nhấn mạnh <u>thời lượng / tính liên tục kéo dài</u>:<br>
-    &nbsp;&nbsp;<i>✔ I've been writing essays <b>all morning</b>.</i>
+    <h4>⚠️ Watch Out #1: Present Perfect Simple vs Present Perfect Continuous</h4>
+    <b>Quy tắc quan trọng:</b><br>
+    • Sử dụng <b>Present Perfect Simple</b> khi đề cập đến <u>số lượng cụ thể / số lần hoàn thành</u>:<br>
+    &nbsp;&nbsp;<i>✔ I've written <b>two essays</b> this week.</i><br>
+    • Sử dụng <b>Present Perfect Continuous</b> khi nhấn mạnh <u>thời lượng / tính liên tục</u> của hành động:<br>
+    &nbsp;&nbsp;<i>✔ I've been working here for <b>five years</b>.</i>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
     <div class="watchout-box">
     <h4>⚠️ Watch Out #2: Stative Verbs in Continuous Tenses</h4>
-    <b>Quy tắc B2:</b><br>
-    Các động từ chỉ trạng thái (stative verbs) như <i>think, have, feel, look, smell, taste</i> có thể dùng ở thì tiếp diễn khi mang nghĩa <b>hành động / quá trình</b>:<br>
-    • <i>I <b>think</b> you're right.</i> (State: think = believe)<br>
-    • <i>I'm <b>thinking</b> about buying a new car.</i> (Action: think = consider)
+    <b>Quy tắc quan trọng:</b><br>
+    Nhiều động từ trạng thái có thể dùng ở thì tiếp diễn khi mô tả <b>HÀNH ĐỘNG</b> thay vì TRẠNG THÁI:<br>
+    • <i>Do you <b>have</b> your plane ticket with you?</i> (State: sở hữu)<br>
+    • <i>Are you <b>having</b> lunch at the moment?</i> (Action: ăn uống)
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
     <div class="watchout-box">
-    <h4>⚠️ Watch Out #3: Annoying Habits with 'Always'</h4>
-    Khi diễn tả thói quen lặp đi lặp lại gây phiền phức hoặc bực mình, sử dụng <b>Present Continuous + always / continually</b>:<br>
-    • <i>✔ You're <b>always leaving</b> your dirty socks on the floor!</i>
+    <h4>⚠️ Watch Out #3: Emphatic Present Simple (do/does)</h4>
+    Có thể dùng <b>do / does + V-bare</b> trong câu khẳng định hiện tại đơn để nhấn mạnh sự tương phản hoặc cảm xúc:<br>
+    • <i>"You don't like going by bus, do you?" "Actually, I <b>do like</b> going by bus for short distances."</i>
     </div>
     """, unsafe_allow_html=True)
 
 # --- 6. BÁO CÁO TIẾN ĐỘ HỌC TẬP ---
 elif menu_option == "📊 Báo cáo Tiến độ Học tập (Progress Report)":
     st.header("📊 Báo cáo Tiến độ Học tập (Progress Report)")
-    st.write("Đánh dấu các Unit hoặc bài Ôn tập bạn đã hoàn thành để theo dõi tỷ lệ phần trăm tiến độ học tập toàn cuốn sách Destination B2.")
+    st.write("Đánh dấu các Unit bạn đã hoàn thành để theo dõi tỷ lệ tiến độ toàn bộ cuốn sách Destination B2.")
     
-    completed_b2 = []
-    st.subheader("✅ Danh sách 28 Units & 14 Reviews:")
+    completed_units = []
+    st.subheader("✅ Danh sách 28 Units, 14 Reviews & 2 Progress Tests:")
     
     cols = st.columns(3)
-    for idx, unit_item in enumerate(ALL_UNITS_LIST):
+    for idx, u in enumerate(ALL_UNITS_LIST):
         col = cols[idx % 3]
-        checked = col.checkbox(unit_item, key=f"chk_b2_{idx}", value=(idx==0))
+        checked = col.checkbox(u, key=f"b2_unit_chk_{idx}", value=(idx==0))
         if checked:
-            completed_b2.append(unit_item)
+            completed_units.append(u)
             
-    total_b2_items = len(ALL_UNITS_LIST)
-    progress_pct = len(completed_b2) / total_b2_items
+    progress = len(completed_units) / len(ALL_UNITS_LIST)
     st.markdown("---")
-    st.subheader("📈 Tiến độ hoàn thành toàn bộ khóa học B2:")
-    st.progress(progress_pct)
-    st.info(f"🎉 Bạn đã hoàn thành **{len(completed_b2)}/{total_b2_items} bài** ({int(progress_pct*100)}%)")
+    st.subheader("📈 Tiến độ hoàn thành toàn bộ chương trình B2:")
+    st.progress(progress)
+    st.info(f"🎉 Bạn đã hoàn thành **{len(completed_units)}/{len(ALL_UNITS_LIST)} bài** ({int(progress*100)}%)")
