@@ -1099,7 +1099,7 @@ elif menu_option == "⚠️ Góc lưu ý (Watch Out! Corner)":
     """, unsafe_allow_html=True)
 
 # --- 6. BÁO CÁO TIẾN ĐỘ HỌC TẬP ---
-eelif menu_option == "📊 Báo cáo Tiến độ Học tập (Progress Report)":
+elif menu_option == "📊 Báo cáo Tiến độ Học tập (Progress Report)":
     st.header("📊 Báo cáo Tiến độ Học tập (Progress Report)")
     st.subheader("✅ Danh sách 28 Units & 14 Reviews:")
     
