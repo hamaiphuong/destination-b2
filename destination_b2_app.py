@@ -129,6 +129,8 @@ ALL_UNITS_LIST = [
     "Progress Test 2: Units 15 - 28"
 ]
 
+VOCAB_UNITS = [u for u in ALL_UNITS_LIST if "Vocabulary" in u or "Review" in u]
+
 # --- 1. TỔNG QUAN & LỘ TRÌNH TỰ HỌC ---
 if menu_option == "📌 Tổng quan & Lộ trình tự học":
     st.header("📌 Tổng quan Sách & Lộ trình Tự học")
