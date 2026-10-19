@@ -963,7 +963,7 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
         st.info(f"Bài tập trắc nghiệm & điền từ tương tác cho **{selected_quiz_unit}** đang được xây dựng theo đáp án chuẩn sách B2.")
 
 # --- 4. THẺ GHI NHỚ TỪ VỰNG (FLASHCARDS) ---
-eelif menu_option == "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)":
+elif menu_option == "🎴 Thẻ ghi nhớ Từ vựng (Flashcards)":
     st.header("🎴 Thẻ ghi nhớ Từ vựng (Flashcards)")
     selected_fc_unit = st.selectbox("🎯 Chọn Unit Từ vựng để ôn Flashcards:", VOCAB_UNITS)
     
