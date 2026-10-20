@@ -729,7 +729,7 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
             score += eval_answer("Ex J - Câu 8", qj8, ["is having a bath", "'s having a bath"], "Đang tắm dùng 'is having a bath'.")
             score += eval_answer("Ex J - Câu 9", qj9, ["does enjoy"], "Nhấn mạnh việc thực sự thích dùng 'does enjoy'.")
     	    # 3. KẾT THÚC: Tính % và tự động lưu vào Progress Report
-   	    pct = int((score / total_qs) * 100)
+            pct = int((score / total_qs) * 100)
             st.info(f"🏆 Điểm số Unit 1 của bạn: **{score}/{total_qs}** ({pct}%)")
 
             # Lưu kết quả để mục Progress Report tự động nhận điểm %:
