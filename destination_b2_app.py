@@ -734,9 +734,8 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
 
             # Lưu kết quả để mục Progress Report tự động nhận điểm %:
             if "completed_units" not in st.session_state:
-            st.session_state.completed_units = {}
-        
-    	    st.session_state.completed_units["Unit 1: Grammar - Present time"] = {
+                st.session_state.completed_units = {}
+    	        st.session_state.completed_units["Unit 1: Grammar - Present time"] = {
         	"score": score,
         	"total": total_qs,
         	"pct": pct
