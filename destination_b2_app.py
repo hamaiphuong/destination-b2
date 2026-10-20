@@ -131,6 +131,10 @@ ALL_UNITS_LIST = [
 
 VOCAB_UNITS = [u for u in ALL_UNITS_LIST if "Vocabulary" in u or "Review" in u]
 
+# Initialize Session State for Progress Tracking
+if "unit_progress" not in st.session_state:
+    st.session_state["unit_progress"] = {}
+
 # --- 1. TỔNG QUAN & LỘ TRÌNH TỰ HỌC ---
 if menu_option == "📌 Tổng quan & Lộ trình tự học":
     st.header("📌 Tổng quan Sách & Lộ trình Tự học")
@@ -447,9 +451,9 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
         st.info("Hãy hoàn thành các bài tập bên dưới.")
         
         tab_a, tab_b, tab_c, tab_d, tab_e, tab_f, tab_g, tab_h, tab_i, tab_j = st.tabs([
-            "Ex A (Circle)", "Ex B (Rewrite)", "Ex C (Verb Form)", "Ex D (Box Words)",
-            "Ex E (MCQs)", "Ex F (Aviators)", "Ex G (Matching)", "Ex H (Extra Word)",
-            "Ex I (Gap Fill)", "Ex J (Transformations)"
+            "Ex A", "Ex B", "Ex C", "Ex D",
+            "Ex E", "Ex F", "Ex G", "Ex H",
+            "Ex I", "Ex J"
         ])
         
         with st.form("unit1_full_quiz_form"):
@@ -584,8 +588,10 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
             submit_u1_quiz = st.form_submit_button("🚀 Kiểm tra Đáp án Unit 1")
 
         if submit_u1_quiz:
+ 	    score = 0
+    	    total_qs = 96  # Thay bằng tổng số câu hỏi thực tế của Unit
             st.markdown("### 📊 Kết quả & Giải thích Chi tiết Unit 1")
-            
+
             # Function helper for evaluating inputs
             def eval_answer(q_id, user_val, correct_vals, explanation):
                 if user_val is None or (isinstance(user_val, str) and user_val.strip() == ""):
@@ -608,120 +614,133 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
                     return 0
 
             # Ex A
-            eval_answer("Ex A - Câu 1", qa1, ["usually goes"], "Trạng từ chỉ tần suất 'usually' đi với Present Simple diễn tả thói quen.")
-            eval_answer("Ex A - Câu 2", qa2, ["is talking"], "'right now' là dấu hiệu nhận biết thì Present Continuous.")
-            eval_answer("Ex A - Câu 3", qa3, ["aren't eating"], "'at the moment' diễn tả hành động đang diễn ra tạm thời ở hiện tại.")
-            eval_answer("Ex A - Câu 4", qa4, ["Is air travel getting"], "Diễn tả sự thay đổi/phát triển kéo dài (changing & developing situation).")
-            eval_answer("Ex A - Câu 5", qa5, ["calls"], "'every weekend' chỉ lịch trình/thói quen lặp đi lặp lại.")
-            eval_answer("Ex A - Câu 6", qa6, ["do babysitters generally earn"], "Hỏi về sự thật/thói quen chung chung.")
-            eval_answer("Ex A - Câu 7", qa7, ["You're always coming"], "Present Continuous + 'always' phàn nàn về thói quen phiền phức.")
-            eval_answer("Ex A - Câu 8", qa8, ["don't go / always try"], "Thói quen sinh hoạt lặp đi lặp lại ở hiện tại.")
-            eval_answer("Ex A - Câu 9", qa9, ["does stop"], "Dùng Emphatic Present Simple ('does stop') để nhấn mạnh sự thật.")
-            eval_answer("Ex A - Câu 10", qa10, ["takes"], "'almost every weekend' diễn tả thói quen lặp đi lặp lại.")
+            score += eval_answer("Ex A - Câu 1", qa1, ["usually goes"], "Trạng từ chỉ tần suất 'usually' đi với Present Simple diễn tả thói quen.")
+            score += eval_answer("Ex A - Câu 2", qa2, ["is talking"], "'right now' là dấu hiệu nhận biết thì Present Continuous.")
+            score += eval_answer("Ex A - Câu 3", qa3, ["aren't eating"], "'at the moment' diễn tả hành động đang diễn ra tạm thời ở hiện tại.")
+            score += eval_answer("Ex A - Câu 4", qa4, ["Is air travel getting"], "Diễn tả sự thay đổi/phát triển kéo dài (changing & developing situation).")
+            score += eval_answer("Ex A - Câu 5", qa5, ["calls"], "'every weekend' chỉ lịch trình/thói quen lặp đi lặp lại.")
+            score += eval_answer("Ex A - Câu 6", qa6, ["do babysitters generally earn"], "Hỏi về sự thật/thói quen chung chung.")
+            score += eval_answer("Ex A - Câu 7", qa7, ["You're always coming"], "Present Continuous + 'always' phàn nàn về thói quen phiền phức.")
+            score += eval_answer("Ex A - Câu 8", qa8, ["don't go / always try"], "Thói quen sinh hoạt lặp đi lặp lại ở hiện tại.")
+            score += eval_answer("Ex A - Câu 9", qa9, ["does stop"], "Dùng Emphatic Present Simple ('does stop') để nhấn mạnh sự thật.")
+            score += eval_answer("Ex A - Câu 10", qa10, ["takes"], "'almost every weekend' diễn tả thói quen lặp đi lặp lại.")
 
             # Ex B
-            eval_answer("Ex B - Câu 11", qb1, ["often gets up"], "'often' chỉ thói quen lặp đi lặp lại nên dùng Present Simple.")
-            eval_answer("Ex B - Câu 12", qb2, ["Do you speak"], "Hỏi về khả năng/ngôn ngữ biết được dùng Present Simple.")
-            eval_answer("Ex B - Câu 13", qb3, ["I've already bought", "I have already bought"], "Trạng từ 'already' diễn tả hành động đã hoàn thành dùng Present Perfect.")
-            eval_answer("Ex B - Câu 14", qb4, ["I've ever had", "I have ever had"], "Cấu trúc 'It's the first time + Present Perfect Simple'.")
-            eval_answer("Ex B - Câu 15", qb5, ["works", "does work"], "Động từ theo sau 'does' nhấn mạnh phải ở dạng nguyên mẫu 'work'.")
-            eval_answer("Ex B - Câu 16", qb6, ["has never eaten"], "Diễn tả trải nghiệm từ trước tới nay dùng Present Perfect Simple.")
-            eval_answer("Ex B - Câu 17", qb7, ["has already booked", "Sean has already booked"], "'already' đi với Present Perfect Simple.")
-            eval_answer("Ex B - Câu 18", qb8, ["Does Melanie need"], "Trợ động từ câu hỏi thì Present Simple là 'Does + S + V-bare'.")
+            score += eval_answer("Ex B - Câu 11", qb1, ["often gets up"], "'often' chỉ thói quen lặp đi lặp lại nên dùng Present Simple.")
+            score += eval_answer("Ex B - Câu 12", qb2, ["Do you speak"], "Hỏi về khả năng/ngôn ngữ biết được dùng Present Simple.")
+            score += eval_answer("Ex B - Câu 13", qb3, ["I've already bought", "I have already bought"], "Trạng từ 'already' diễn tả hành động đã hoàn thành dùng Present Perfect.")
+            score += eval_answer("Ex B - Câu 14", qb4, ["I've ever had", "I have ever had"], "Cấu trúc 'It's the first time + Present Perfect Simple'.")
+            score += eval_answer("Ex B - Câu 15", qb5, ["works", "does work"], "Động từ theo sau 'does' nhấn mạnh phải ở dạng nguyên mẫu 'work'.")
+            score += eval_answer("Ex B - Câu 16", qb6, ["has never eaten"], "Diễn tả trải nghiệm từ trước tới nay dùng Present Perfect Simple.")
+            score += eval_answer("Ex B - Câu 17", qb7, ["has already booked", "Sean has already booked"], "'already' đi với Present Perfect Simple.")
+            score += eval_answer("Ex B - Câu 18", qb8, ["Does Melanie need"], "Trợ động từ câu hỏi thì Present Simple là 'Does + S + V-bare'.")
 
             # Ex C
-            eval_answer("Ex C - Câu 19", qc1, ["I've ever eaten", "I have ever eaten"], "Cấu trúc 'It's the first time + Present Perfect'.")
-            eval_answer("Ex C - Câu 20", qc2, ["hasn't seen", "has not seen"], "Mốc thời gian 'since' đi với Present Perfect.")
-            eval_answer("Ex C - Câu 21", qc3, ["have gone", "'ve gone"], "Hành động đã đi chưa về (họ đang ở Tây Ban Nha).")
-            eval_answer("Ex C - Câu 22", qc4, ["has been writing", "'s been writing"], "Nhấn mạnh thời lượng kéo dài 'for hours now'.")
-            eval_answer("Ex C - Câu 23", qc5, ["Have you ever met"], "Hỏi về trải nghiệm với 'ever'.")
-            eval_answer("Ex C - Câu 24", qc6, ["I've been trying", "I have been trying"], "Nhấn mạnh quá trình liên tục 'all morning'.")
-            eval_answer("Ex C - Câu 25", qc7, ["I haven't finished", "I have not finished"], "Chưa hoàn thành đi với 'yet' ở Present Perfect.")
-            eval_answer("Ex C - Câu 26", qc8, ["Have you already decided"], "Hỏi về quyết định đã làm xong đi với 'already'.")
-            eval_answer("Ex C - Câu 27", qc9, ["We've lived", "We've been living", "We have lived"], "Kéo dài từ quá khứ đến nay với 'for the last six years'.")
-            eval_answer("Ex C - Câu 28", qc10, ["I've never heard", "I have never heard"], "Trải nghiệm chưa từng làm với 'never'.")
+            score += eval_answer("Ex C - Câu 19", qc1, ["I've ever eaten", "I have ever eaten"], "Cấu trúc 'It's the first time + Present Perfect'.")
+            score += eval_answer("Ex C - Câu 20", qc2, ["hasn't seen", "has not seen"], "Mốc thời gian 'since' đi với Present Perfect.")
+            score += eval_answer("Ex C - Câu 21", qc3, ["have gone", "'ve gone"], "Hành động đã đi chưa về (họ đang ở Tây Ban Nha).")
+            score += eval_answer("Ex C - Câu 22", qc4, ["has been writing", "'s been writing"], "Nhấn mạnh thời lượng kéo dài 'for hours now'.")
+            score += eval_answer("Ex C - Câu 23", qc5, ["Have you ever met"], "Hỏi về trải nghiệm với 'ever'.")
+            score += eval_answer("Ex C - Câu 24", qc6, ["I've been trying", "I have been trying"], "Nhấn mạnh quá trình liên tục 'all morning'.")
+            score += eval_answer("Ex C - Câu 25", qc7, ["I haven't finished", "I have not finished"], "Chưa hoàn thành đi với 'yet' ở Present Perfect.")
+            score += eval_answer("Ex C - Câu 26", qc8, ["Have you already decided"], "Hỏi về quyết định đã làm xong đi với 'already'.")
+            score += eval_answer("Ex C - Câu 27", qc9, ["We've lived", "We've been living", "We have lived"], "Kéo dài từ quá khứ đến nay với 'for the last six years'.")
+            score += eval_answer("Ex C - Câu 28", qc10, ["I've never heard", "I have never heard"], "Trải nghiệm chưa từng làm với 'never'.")
 
             # Ex D
-            eval_answer("Ex D - Câu 29", qd1, ["ever"], "'Have you ever dreamt...' hỏi trải nghiệm.")
-            eval_answer("Ex D - Câu 30", qd2, ["yet"], "'yet' đứng cuối câu phủ định.")
-            eval_answer("Ex D - Câu 31", qd3, ["since"], "'since he was born' chỉ mốc thời gian.")
-            eval_answer("Ex D - Câu 32", qd4, ["for"], "'for a couple of minutes' chỉ khoảng thời gian.")
-            eval_answer("Ex D - Câu 33", qd5, ["so"], "Cụm 'so far' nghĩa là cho đến nay.")
-            eval_answer("Ex D - Câu 34", qd6, ["rarely"], "Chỉ tần suất hiếm khi.")
-            eval_answer("Ex D - Câu 35", qd7, ["just"], "'just' diễn tả vừa mới xảy ra.")
-            eval_answer("Ex D - Câu 36", qd8, ["still"], "'still' nhấn mạnh việc vẫn chưa xảy ra.")
-            eval_answer("Ex D - Câu 37", qd9, ["before"], "'before' đứng cuối câu mang nghĩa trước đây.")
-            eval_answer("Ex D - Câu 38", qd10, ["already"], "Diễn tả sự ngạc nhiên vì hoàn thành quá nhanh.")
+            score += eval_answer("Ex D - Câu 29", qd1, ["ever"], "'Have you ever dreamt...' hỏi trải nghiệm.")
+            score += eval_answer("Ex D - Câu 30", qd2, ["yet"], "'yet' đứng cuối câu phủ định.")
+            score += eval_answer("Ex D - Câu 31", qd3, ["since"], "'since he was born' chỉ mốc thời gian.")
+            score += eval_answer("Ex D - Câu 32", qd4, ["for"], "'for a couple of minutes' chỉ khoảng thời gian.")
+            score += eval_answer("Ex D - Câu 33", qd5, ["so"], "Cụm 'so far' nghĩa là cho đến nay.")
+            score += eval_answer("Ex D - Câu 34", qd6, ["rarely"], "Chỉ tần suất hiếm khi.")
+            score += eval_answer("Ex D - Câu 35", qd7, ["just"], "'just' diễn tả vừa mới xảy ra.")
+            score += eval_answer("Ex D - Câu 36", qd8, ["still"], "'still' nhấn mạnh việc vẫn chưa xảy ra.")
+            score += eval_answer("Ex D - Câu 37", qd9, ["before"], "'before' đứng cuối câu mang nghĩa trước đây.")
+            score += eval_answer("Ex D - Câu 38", qd10, ["already"], "Diễn tả sự ngạc nhiên vì hoàn thành quá nhanh.")
 
             # Ex E
-            eval_answer("Ex E - Câu 39", qe1, ["B. is taking"], "'at the moment' chia Present Continuous.")
-            eval_answer("Ex E - Câu 40", qe2, ["C. Have you ever been"], "Hỏi trải nghiệm với 'before'.")
-            eval_answer("Ex E - Câu 41", qe3, ["C. have already written"], "Đã viết xong gửi đi dùng Present Perfect.")
-            eval_answer("Ex E - Câu 42", qe4, ["D. Have you been watching"], "Nhấn mạnh hành động xem liên tục 'for the last four hours'.")
-            eval_answer("Ex E - Câu 43", qe5, ["A. do you usually play"], "Hỏi về thói quen chơi thể thao.")
-            eval_answer("Ex E - Câu 44", qe6, ["C. I have got"], "Cấu trúc 'That's the first time + Present Perfect'.")
-            eval_answer("Ex E - Câu 45", qe7, ["A. already"], "Trạng từ 'already' đứng giữa 'has' và V3.")
-            eval_answer("Ex E - Câu 46", qe8, ["B. is sleeping"], "Tình huống tạm thời kéo dài ở hiện tại.")
-            eval_answer("Ex E - Câu 47", qe9, ["A. doesn't get"], "'very often' chia Present Simple.")
-            eval_answer("Ex E - Câu 48", qe10, ["A. do drink"], "Emphatic Present Simple nhấn mạnh thói quen hàng ngày.")
+            score += eval_answer("Ex E - Câu 39", qe1, ["B. is taking"], "'at the moment' chia Present Continuous.")
+            score += eval_answer("Ex E - Câu 40", qe2, ["C. Have you ever been"], "Hỏi trải nghiệm với 'before'.")
+            score += eval_answer("Ex E - Câu 41", qe3, ["C. have already written"], "Đã viết xong gửi đi dùng Present Perfect.")
+            score += eval_answer("Ex E - Câu 42", qe4, ["D. Have you been watching"], "Nhấn mạnh hành động xem liên tục 'for the last four hours'.")
+            score += eval_answer("Ex E - Câu 43", qe5, ["A. do you usually play"], "Hỏi về thói quen chơi thể thao.")
+            score += eval_answer("Ex E - Câu 44", qe6, ["C. I have got"], "Cấu trúc 'That's the first time + Present Perfect'.")
+            score += eval_answer("Ex E - Câu 45", qe7, ["A. already"], "Trạng từ 'already' đứng giữa 'has' và V3.")
+            score += eval_answer("Ex E - Câu 46", qe8, ["B. is sleeping"], "Tình huống tạm thời kéo dài ở hiện tại.")
+            score += eval_answer("Ex E - Câu 47", qe9, ["A. doesn't get"], "'very often' chia Present Simple.")
+            score += eval_answer("Ex E - Câu 48", qe10, ["A. do drink"], "Emphatic Present Simple nhấn mạnh thói quen hàng ngày.")
 
             # Ex F
-            eval_answer("Ex F - Gap 1", qf1, ["knows"], "Sự thật mọi người đều biết.")
-            eval_answer("Ex F - Gap 2", qf2, ["is"], "Cấu trúc 'Is it possible...'.")
-            eval_answer("Ex F - Gap 3", qf3, ["look"], "Trông giống như ('look like').")
-            eval_answer("Ex F - Gap 4", qf4, ["see"], "Nhìn thấy từ trên cao.")
-            eval_answer("Ex F - Gap 5", qf5, ["understand", "know", "see"], "Hiểu/rõ được ý nghĩa.")
-            eval_answer("Ex F - Gap 6", qf6, ["include"], "Bao gồm động vật và biểu tượng.")
-            eval_answer("Ex F - Gap 7", qf7, ["disagree"], "Không đồng tình ('disagree with').")
-            eval_answer("Ex F - Gap 8", qf8, ["seems"], "Có vẻ như không thể tin được.")
-            eval_answer("Ex F - Gap 9", qf9, ["do"], "Nhấn mạnh 'do believe' (thực sự tin).")
+            score += eval_answer("Ex F - Gap 1", qf1, ["knows"], "Sự thật mọi người đều biết.")
+            score += eval_answer("Ex F - Gap 2", qf2, ["is"], "Cấu trúc 'Is it possible...'.")
+            score += eval_answer("Ex F - Gap 3", qf3, ["look"], "Trông giống như ('look like').")
+            score += eval_answer("Ex F - Gap 4", qf4, ["see"], "Nhìn thấy từ trên cao.")
+            score += eval_answer("Ex F - Gap 5", qf5, ["understand", "know", "see"], "Hiểu/rõ được ý nghĩa.")
+            score += eval_answer("Ex F - Gap 6", qf6, ["include"], "Bao gồm động vật và biểu tượng.")
+            score += eval_answer("Ex F - Gap 7", qf7, ["disagree"], "Không đồng tình ('disagree with').")
+            score += eval_answer("Ex F - Gap 8", qf8, ["seems"], "Có vẻ như không thể tin được.")
+            score += eval_answer("Ex F - Gap 9", qf9, ["do"], "Nhấn mạnh 'do believe' (thực sự tin).")
 
             # Ex G
-            eval_answer("Ex G - Q1", qg1, ["B. I'm going to buy the new Racetrack CD."], "'I think' đi với mệnh đề suy nghĩ.")
-            eval_answer("Ex G - Q2", qg2, ["F. of getting Dad a CD for his birthday."], "'I'm thinking of + V-ing'.")
-            eval_answer("Ex G - Q3", qg3, ["D. for his glasses. Have you seen them?"], "'look for' tìm kiếm kính.")
-            eval_answer("Ex G - Q4", qg4, ["H. like he needs a holiday!"], "'look like' trông có vẻ như.")
-            eval_answer("Ex G - Q5", qg5, ["A. darker hair than her sister."], "'have' chỉ đặc điểm sở hữu.")
-            eval_answer("Ex G - Q6", qg6, ["C. a haircut at the moment."], "'is having a haircut' chỉ hành động cắt tóc.")
-            eval_answer("Ex G - Q7", qg7, ["E. not old enough to drive a car."], "'be' chỉ bản chất/độ tuổi.")
-            eval_answer("Ex G - Q8", qg8, ["G. very annoying at the moment!"], "'is being' chỉ hành vi tạm thời gây phiền.")
+            score += eval_answer("Ex G - Q1", qg1, ["B. I'm going to buy the new Racetrack CD."], "'I think' đi với mệnh đề suy nghĩ.")
+            score += eval_answer("Ex G - Q2", qg2, ["F. of getting Dad a CD for his birthday."], "'I'm thinking of + V-ing'.")
+            score += eval_answer("Ex G - Q3", qg3, ["D. for his glasses. Have you seen them?"], "'look for' tìm kiếm kính.")
+            score += eval_answer("Ex G - Q4", qg4, ["H. like he needs a holiday!"], "'look like' trông có vẻ như.")
+            score += eval_answer("Ex G - Q5", qg5, ["A. darker hair than her sister."], "'have' chỉ đặc điểm sở hữu.")
+            score += eval_answer("Ex G - Q6", qg6, ["C. a haircut at the moment."], "'is having a haircut' chỉ hành động cắt tóc.")
+            score += eval_answer("Ex G - Q7", qg7, ["E. not old enough to drive a car."], "'be' chỉ bản chất/độ tuổi.")
+            score += eval_answer("Ex G - Q8", qg8, ["G. very annoying at the moment!"], "'is being' chỉ hành vi tạm thời gây phiền.")
 
             # Ex H
-            eval_answer("Ex H - Line 1", qh1, ["to"], "Thừa từ 'to' ('been travelling').")
-            eval_answer("Ex H - Line 2", qh2, ["going"], "Thừa từ 'going' ('been abroad').")
-            eval_answer("Ex H - Line 3", qh3, ["to"], "Thừa từ 'to' ('have also made').")
-            eval_answer("Ex H - Line 4", qh4, ["decided", "been"], "Thừa từ 'been' ('I have decided').")
-            eval_answer("Ex H - Line 5", qh5, ["making"], "Thừa từ 'making' ('was on holiday').")
-            eval_answer("Ex H - Line 6", qh6, ["to"], "Thừa từ 'to' ('text messages each other').")
-            eval_answer("Ex H - Line 7", qh7, ["have"], "Thừa từ 'have' ('planning to visit').")
-            eval_answer("Ex H - Line 8", qh8, ["am"], "Thừa từ 'am' ('I love meeting').")
-            eval_answer("Ex H - Line 9", qh9, ["had"], "Thừa từ 'had' ('want to have lots').")
-            eval_answer("Ex H - Line 10", qh10, ["is"], "Thừa từ 'is' ('it also broadens').")
+            score += eval_answer("Ex H - Line 1", qh1, ["to"], "Thừa từ 'to' ('been travelling').")
+            score += eval_answer("Ex H - Line 2", qh2, ["going"], "Thừa từ 'going' ('been abroad').")
+            score += eval_answer("Ex H - Line 3", qh3, ["to"], "Thừa từ 'to' ('have also made').")
+            score += eval_answer("Ex H - Line 4", qh4, ["decided", "been"], "Thừa từ 'been' ('I have decided').")
+            score += eval_answer("Ex H - Line 5", qh5, ["making"], "Thừa từ 'making' ('was on holiday').")
+            score += eval_answer("Ex H - Line 6", qh6, ["to"], "Thừa từ 'to' ('text messages each other').")
+            score += eval_answer("Ex H - Line 7", qh7, ["have"], "Thừa từ 'have' ('planning to visit').")
+            score += eval_answer("Ex H - Line 8", qh8, ["am"], "Thừa từ 'am' ('I love meeting').")
+            score += eval_answer("Ex H - Line 9", qh9, ["had"], "Thừa từ 'had' ('want to have lots').")
+            score += eval_answer("Ex H - Line 10", qh10, ["is"], "Thừa từ 'is' ('it also broadens').")
 
             # Ex I
-            eval_answer("Ex I - Gap 1", qi1, ["been"], "'You've been looking...'")
-            eval_answer("Ex I - Gap 2", qi2, ["do"], "'I do wish...' nhấn mạnh.")
-            eval_answer("Ex I - Gap 3", qi3, ["got", "have"], "'I've got a splitting headache'.")
-            eval_answer("Ex I - Gap 4", qi4, ["being"], "'You're both being very silly'.")
-            eval_answer("Ex I - Gap 5", qi5, ["There"], "'There is no point...'.")
-            eval_answer("Ex I - Gap 6", qi6, ["are"], "'You are quite right'.")
-            eval_answer("Ex I - Gap 7", qi7, ["am"], "'I am sorry'.")
-            eval_answer("Ex I - Gap 8", qi8, ["looks"], "'it looks like...'.")
-            eval_answer("Ex I - Gap 9", qi9, ["have"], "'we have definitely missed...'.")
-            eval_answer("Ex I - Gap 10", qi10, ["think", "suppose"], "'I think so'.")
-            eval_answer("Ex I - Gap 11", qi11, ["not"], "'one thing is not in doubt'.")
-            eval_answer("Ex I - Gap 12", qi12, ["ever"], "'worst holiday we've ever been on'.")
+            score += eval_answer("Ex I - Gap 1", qi1, ["been"], "'You've been looking...'")
+            score += eval_answer("Ex I - Gap 2", qi2, ["do"], "'I do wish...' nhấn mạnh.")
+            score += eval_answer("Ex I - Gap 3", qi3, ["got", "have"], "'I've got a splitting headache'.")
+            score += eval_answer("Ex I - Gap 4", qi4, ["being"], "'You're both being very silly'.")
+            score += eval_answer("Ex I - Gap 5", qi5, ["There"], "'There is no point...'.")
+            score += eval_answer("Ex I - Gap 6", qi6, ["are"], "'You are quite right'.")
+            score += eval_answer("Ex I - Gap 7", qi7, ["am"], "'I am sorry'.")
+            score += eval_answer("Ex I - Gap 8", qi8, ["looks"], "'it looks like...'.")
+            score += eval_answer("Ex I - Gap 9", qi9, ["have"], "'we have definitely missed...'.")
+            score += eval_answer("Ex I - Gap 10", qi10, ["think", "suppose"], "'I think so'.")
+            score += eval_answer("Ex I - Gap 11", qi11, ["not"], "'one thing is not in doubt'.")
+            score += eval_answer("Ex I - Gap 12", qi12, ["ever"], "'worst holiday we've ever been on'.")
 
             # Ex J
-            eval_answer("Ex J - Câu 1", qj1, ["much do the tickets cost", "much are the tickets"], "Cấu trúc hỏi giá tiền với 'much'.")
-            eval_answer("Ex J - Câu 2", qj2, ["these trainers belong to"], "Thuộc về ai dùng 'belong to'.")
-            eval_answer("Ex J - Câu 3", qj3, ["does not like", "doesn't like"], "Thích cái gì dùng 'like'.")
-            eval_answer("Ex J - Câu 4", qj4, ["has only been", "'s only been"], "Đã ở phòng thu lần nào dùng 'has been'.")
-            eval_answer("Ex J - Câu 5", qj5, ["have been here for", "'ve been here for"], "Đã ở đây bao lâu dùng Present Perfect + 'for'.")
-            eval_answer("Ex J - Câu 6", qj6, ["have been writing this for", "'ve been writing this for"], "Viết liên tục bao nhiêu giờ dùng Present Perfect Continuous.")
-            eval_answer("Ex J - Câu 7", qj7, ["time I have flown", "time I've flown", "time that I have flown"], "Lần đầu làm gì dùng 'first time I have V3'.")
-            eval_answer("Ex J - Câu 8", qj8, ["is having a bath", "'s having a bath"], "Đang tắm dùng 'is having a bath'.")
-            eval_answer("Ex J - Câu 9", qj9, ["does enjoy"], "Nhấn mạnh việc thực sự thích dùng 'does enjoy'.")
+            score += eval_answer("Ex J - Câu 1", qj1, ["much do the tickets cost", "much are the tickets"], "Cấu trúc hỏi giá tiền với 'much'.")
+            score += eval_answer("Ex J - Câu 2", qj2, ["these trainers belong to"], "Thuộc về ai dùng 'belong to'.")
+            score += eval_answer("Ex J - Câu 3", qj3, ["does not like", "doesn't like"], "Thích cái gì dùng 'like'.")
+            score += eval_answer("Ex J - Câu 4", qj4, ["has only been", "'s only been"], "Đã ở phòng thu lần nào dùng 'has been'.")
+            score += eval_answer("Ex J - Câu 5", qj5, ["have been here for", "'ve been here for"], "Đã ở đây bao lâu dùng Present Perfect + 'for'.")
+            score += eval_answer("Ex J - Câu 6", qj6, ["have been writing this for", "'ve been writing this for"], "Viết liên tục bao nhiêu giờ dùng Present Perfect Continuous.")
+            score += eval_answer("Ex J - Câu 7", qj7, ["time I have flown", "time I've flown", "time that I have flown"], "Lần đầu làm gì dùng 'first time I have V3'.")
+            score += eval_answer("Ex J - Câu 8", qj8, ["is having a bath", "'s having a bath"], "Đang tắm dùng 'is having a bath'.")
+            score += eval_answer("Ex J - Câu 9", qj9, ["does enjoy"], "Nhấn mạnh việc thực sự thích dùng 'does enjoy'.")
+    	    # 3. KẾT THÚC: Tính % và tự động lưu vào Progress Report
+   	    pct = int((score / total_qs) * 100)
+            st.info(f"🏆 Điểm số Unit 1 của bạn: **{score}/{total_qs}** ({pct}%)")
+
+            # Lưu kết quả để mục Progress Report tự động nhận điểm %:
+            if "completed_units" not in st.session_state:
+            st.session_state.completed_units = {}
+        
+    	    st.session_state.completed_units["Unit 1: Grammar - Present time"] = {
+        	"score": score,
+        	"total": total_qs,
+        	"pct": pct
+    	    }
 
     elif "Unit 2" in selected_quiz_unit:
         st.subheader("✍️ Unit 2: Vocabulary - Travel and Transport - Full Practice Exercises")
@@ -1102,18 +1121,58 @@ elif menu_option == "⚠️ Góc lưu ý (Watch Out! Corner)":
 
 # --- 6. BÁO CÁO TIẾN ĐỘ HỌC TẬP ---
 elif menu_option == "📊 Báo cáo Tiến độ Học tập (Progress Report)":
-    st.header("📊 Báo cáo Tiến độ Học tập (Progress Report)")
-    st.subheader("✅ Danh sách 28 Units & 14 Reviews:")
+    st.header("📊 Báo cáo Tiến độ Học tập Tự động")
+    st.write("Hệ thống tự động ghi nhận tiến độ và kết quả khi bạn hoàn thành bài tập ở mục Bài tập Tương tác.")
     
-    col_p1, col_p2 = st.columns(2)
-    completed_count = 0
-    total_units = len(ALL_UNITS_LIST)
+    # 1. Lấy dữ liệu bài đã làm từ session_state
+    user_progress = st.session_state.get("completed_units", {})
+    total_items = len(ALL_UNITS_LIST)
+    completed_count = len(user_progress)
     
-    for idx, u_name in enumerate(ALL_UNITS_LIST):
-        with (col_p1 if idx % 2 == 0 else col_p2):
-            checked = st.checkbox(f"{u_name}", key=f"prog_{idx}")
-            if checked:
-                completed_count += 1
-                
-    st.progress(completed_count / total_units)
-    st.success(f"📈 Bạn đã hoàn thành **{completed_count} / {total_units}** bài học ({int(completed_count/total_units*100)}%).")
+    # 2. Tính % tiến độ toàn khóa học
+    progress_pct = completed_count / total_items if total_items > 0 else 0.0
+    
+    # 3. Bảng chỉ số tổng quan (Top Metrics)
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("📈 Tiến độ toàn khóa", f"{int(progress_pct * 100)}%")
+    with col2:
+        st.metric("✅ Bài tập đã hoàn thành", f"{completed_count} / {total_items} bài")
+    with col3:
+        if completed_count > 0:
+            avg_score = sum(data["pct"] for data in user_progress.values()) / completed_count
+            st.metric("🏆 Điểm trung bình", f"{int(avg_score)}%")
+        else:
+            st.metric("🏆 Điểm trung bình", "0%")
+            
+    # Thanh tiến độ
+    st.progress(progress_pct)
+    st.markdown("---")
+    
+    # 4. Bảng chi tiết từng Unit
+    st.subheader("📋 Chi tiết trạng thái từng Unit")
+    table_data = []
+    
+    for idx, unit_name in enumerate(ALL_UNITS_LIST, 1):
+        if unit_name in user_progress:
+            info = user_progress[unit_name]
+            status = "✅ Đã hoàn thành"
+            score_str = f"{info['score']}/{info['total']} ({info['pct']}%)"
+        else:
+            status = "⏳ Chưa làm bài tập"
+            score_str = "---"
+            
+        table_data.append({
+            "STT": idx,
+            "Tên Unit / Bài Ôn tập": unit_name,
+            "Trạng thái": status,
+            "Kết quả Bài tập": score_str
+        })
+        
+    df_progress = pd.DataFrame(table_data)
+    st.dataframe(df_progress, use_container_width=True, height=450)
+    
+    # 5. Nút Đặt lại tiến độ
+    if st.button("🔄 Đặt lại toàn bộ Tiến độ"):
+        st.session_state.completed_units = {}
+        st.rerun()
