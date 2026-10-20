@@ -588,8 +588,8 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
             submit_u1_quiz = st.form_submit_button("🚀 Kiểm tra Đáp án Unit 1")
 
         if submit_u1_quiz:
- 	    score = 0
-    	    total_qs = 96  # Thay bằng tổng số câu hỏi thực tế của Unit
+            score = 0
+            total_qs = 96  # Thay bằng tổng số câu hỏi thực tế của Unit
             st.markdown("### 📊 Kết quả & Giải thích Chi tiết Unit 1")
 
             # Function helper for evaluating inputs
@@ -614,7 +614,7 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
                     return 0
 
             # Ex A
-	    score += eval_answer("Ex A - Câu 1", qa1, ["usually goes"], "Trạng từ chỉ tần suất 'usually' đi với Present Simple diễn tả thói quen.")
+            score += eval_answer("Ex A - Câu 1", qa1, ["usually goes"], "Trạng từ chỉ tần suất 'usually' đi với Present Simple diễn tả thói quen.")
 	    score += eval_answer("Ex A - Câu 2", qa2, ["is talking"], "'right now' là dấu hiệu nhận biết thì Present Continuous.")
             score += eval_answer("Ex A - Câu 3", qa3, ["aren't eating"], "'at the moment' diễn tả hành động đang diễn ra tạm thời ở hiện tại.")
             score += eval_answer("Ex A - Câu 4", qa4, ["Is air travel getting"], "Diễn tả sự thay đổi/phát triển kéo dài (changing & developing situation).")
