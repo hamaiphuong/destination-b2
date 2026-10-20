@@ -615,7 +615,7 @@ elif menu_option == "✍️ Bài tập Tương tác & Chấm điểm tự độn
 
             # Ex A
             score += eval_answer("Ex A - Câu 1", qa1, ["usually goes"], "Trạng từ chỉ tần suất 'usually' đi với Present Simple diễn tả thói quen.")
-	    score += eval_answer("Ex A - Câu 2", qa2, ["is talking"], "'right now' là dấu hiệu nhận biết thì Present Continuous.")
+            score += eval_answer("Ex A - Câu 2", qa2, ["is talking"], "'right now' là dấu hiệu nhận biết thì Present Continuous.")
             score += eval_answer("Ex A - Câu 3", qa3, ["aren't eating"], "'at the moment' diễn tả hành động đang diễn ra tạm thời ở hiện tại.")
             score += eval_answer("Ex A - Câu 4", qa4, ["Is air travel getting"], "Diễn tả sự thay đổi/phát triển kéo dài (changing & developing situation).")
             score += eval_answer("Ex A - Câu 5", qa5, ["calls"], "'every weekend' chỉ lịch trình/thói quen lặp đi lặp lại.")
